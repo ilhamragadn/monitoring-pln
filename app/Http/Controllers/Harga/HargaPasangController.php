@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Harga;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HargaPasang extends Controller
+class HargaPasangController extends Controller
 {
     /**
      * Display a listing of the resource.
