@@ -22,11 +22,11 @@
 
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <h1 class="text-3xl font-bold text-white">Test</h1>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-5 p-5 bg-slate-400 border border-gray-200">
+            <x-sidebar></x-sidebar>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg m-3 bg-slate-400 border border-gray-200">
                 <table id="hargapasang-tabel"
-                    class="table-auto m-3 border-collapse border border-slate-500 w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs m-3 text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    class="table-auto border-collapse border border-slate-500 w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th class="border border-slate-600 px-6 py-3" scope="col">NO.</th>
                             <th class="border border-slate-600 px-6 py-3" scope="col">MATERIAL</th>
@@ -36,6 +36,7 @@
                             <th class="border border-slate-600 px-6 py-3" scope="col">RP JASA</th>
                             <th class="border border-slate-600 px-6 py-3" scope="col">RP TOTAL</th>
                             <th class="border border-slate-600 px-6 py-3" scope="col">KLASIFIKASI</th>
+                            <th class="border border-slate-600 px-6 py-3" scope="col">TINDAKAN</th>
                         </tr>
                     </thead>
                 </table>
