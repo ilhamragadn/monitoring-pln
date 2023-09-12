@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Harga;
 
 use App\Http\Controllers\Controller;
+use App\Models\HargaPasang;
 use Illuminate\Http\Request;
 
 class HargaPasangController extends Controller
@@ -14,6 +15,11 @@ class HargaPasangController extends Controller
     {
         //
         return view('harga.index');
+    }
+
+    public function data()
+    {
+        return HargaPasang::datatable();
     }
 
     /**

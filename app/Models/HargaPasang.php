@@ -18,4 +18,8 @@ class HargaPasang extends Model
         'rp_total',
         'klasifikasi'
     ];
+    public function DataHargaPasangtable($query)
+    {
+        return datatables($query->select('id', 'material', 'satuan', 'rp_mdu', 'rp_non_mdu_dan_jasa', 'jasa', 'rp_total', 'klasifikasi'))->toJson();
+    }
 }

@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::resource('/harga', HargaPasangController::class);
+Route::get('/harga/data', [HargaPasangController::class, 'data'])->name('harga.data');
