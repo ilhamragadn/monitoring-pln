@@ -12,6 +12,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -30,10 +32,11 @@
             @endif
 
             <!-- Page Content -->
-            <main class="p-4 sm:ml-64">
+            <main class="border border-white p-2 sm:ml-64">
                 {{ $slot }}
             </main>
         </div>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     </body>
 
 </html>

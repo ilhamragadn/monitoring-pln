@@ -14,7 +14,7 @@ class HargaPasangController extends Controller
     public function index()
     {
         //
-        return view('harga.index');
+        return view('harga.harga-pasang.index');
     }
 
     public function data()

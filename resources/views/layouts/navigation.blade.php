@@ -131,7 +131,9 @@
             <li>
                 <x-dropdown-sidebar align="right" width="auto">
                     <x-slot name="trigger">
-                        <x-nav-link class="mt-4 text-xl px-4 py-1 border-b rounded-md dark:border-yellow-400">
+                        <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('harga-pasang.index') || request()->routeIs('harga-bongkar.index')
+                            ? 'true'
+                            : 'false'">
                             <span class="mx-auto py-2 flex ">
                                 {{ __('Daftar Harga') }}
                             </span>
@@ -145,9 +147,7 @@
                     <x-slot name="content">
                         <ul>
                             <li>
-                                <x-nav-link
-                                    class="text-xl px-4 py-1 border-b rounded-md dark:border-yellow-400 hover:dark:bg-gray-500 "
-                                    :active="request()->routeIs('harga')">
+                                <x-nav-link :href="route('harga-pasang.index')" class="text-xl px-4 py-1" :active="request()->routeIs('harga-pasang.index')">
                                     <span class="mx-auto py-2 flex ">
                                         {{ __('Harga Pasang') }}
                                     </span>
@@ -155,7 +155,7 @@
                             </li>
                             <li>
                                 <x-nav-link
-                                    class="text-xl px-4 py-1 border-b rounded-md dark:border-yellow-400 hover:dark:bg-gray-500"
+                                    class="text-xl px-4 py-1  hover:dark:bg-gray-500"
                                     :active="request()->routeIs('harga')">
                                     <span class="mx-auto py-2 flex ">
                                         {{ __('Harga Bongkar') }}

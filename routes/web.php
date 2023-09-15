@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Harga\HargaPasangController as HargaPasangController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //redirect data harga
+    Route::resource('harga-pasang', HargaPasangController::class);
+    Route::get('/harga-pasang/data', [HargaPasangController::class, 'data'])->name('harga-pasang.data');
 });
 
+
 require __DIR__.'/auth.php';
-Route::resource('/harga', HargaPasangController::class);
-Route::get('/harga/data', [HargaPasangController::class, 'data'])->name('harga.data');

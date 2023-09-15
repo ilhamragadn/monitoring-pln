@@ -8,7 +8,7 @@ export default {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
         "./resources/**/*.js",
-        "./node_modules/flowbite/**/*.js"
+        "./node_modules/flowbite/**/*.js",
     ],
 
     theme: {
@@ -19,6 +19,5 @@ export default {
         },
     },
 
-    plugins: [forms, require("@tailwindcss/forms"), require("flowbite/plugin")],
-
+    plugins: [forms, require("@tailwindcss/forms")],
 };
