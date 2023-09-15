@@ -1,27 +1,27 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+<nav x-data="{ open: false }" class="fixed top-0 z-40 w-screen bg-white dark:bg-gray-800">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                {{-- <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
-                </div>
+                </div> --}}
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link>
                         {{ __('MDU') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->
@@ -30,8 +30,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
+                            <div class="text-lg">{{ Auth::user()->name }}</div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
@@ -112,3 +111,63 @@
         </div>
     </div>
 </nav>
+
+<aside x-data="{ open: true }"
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white dark:bg-gray-800 border-r border-gray-100 sm:translate-x-0 dark:border-gray-700">
+    <div class="h-full px-2 py-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <div class="pb-2 border-b-2 border-indigo-400 dark:border-indigo-600">
+            <a href="{{ route('dashboard') }}">
+                <x-application-logo class="h-14 w-auto flex mx-auto fill-current text-gray-800 dark:text-gray-200" />
+            </a>
+        </div>
+        <ul class="mt-10 space-y-2 font-medium">
+            <li>
+                <x-nav-link :href="route('dashboard')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('dashboard')">
+                    <span class="mx-auto py-2 flex">
+                        {{ __('Dashboard') }}
+                    </span>
+                </x-nav-link>
+            </li>
+            <li>
+                <x-dropdown-sidebar align="right" width="auto">
+                    <x-slot name="trigger">
+                        <x-nav-link class="mt-4 text-xl px-4 py-1 border-b rounded-md dark:border-yellow-400">
+                            <span class="mx-auto py-2 flex ">
+                                {{ __('Daftar Harga') }}
+                            </span>
+                            <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </x-nav-link>
+                    </x-slot>
+                    <x-slot name="content">
+                        <ul>
+                            <li>
+                                <x-nav-link
+                                    class="text-xl px-4 py-1 border-b rounded-md dark:border-yellow-400 hover:dark:bg-gray-500 "
+                                    :active="request()->routeIs('harga')">
+                                    <span class="mx-auto py-2 flex ">
+                                        {{ __('Harga Pasang') }}
+                                    </span>
+                                </x-nav-link>
+                            </li>
+                            <li>
+                                <x-nav-link
+                                    class="text-xl px-4 py-1 border-b rounded-md dark:border-yellow-400 hover:dark:bg-gray-500"
+                                    :active="request()->routeIs('harga')">
+                                    <span class="mx-auto py-2 flex ">
+                                        {{ __('Harga Bongkar') }}
+                                    </span>
+                                </x-nav-link>
+                            </li>
+                        </ul>
+                    </x-slot>
+                </x-dropdown-sidebar>
+            </li>
+
+        </ul>
+
+    </div>
+</aside>
