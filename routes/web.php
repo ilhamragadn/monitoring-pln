@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Harga\HargaPasangController as HargaPasangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+Route::resource('/harga', HargaPasangController::class);
+Route::get('/harga/data', [HargaPasangController::class, 'data'])->name('harga.data');
