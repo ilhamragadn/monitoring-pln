@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('material');
             $table->string('satuan');
-            $table->float('rp_mdu');
-            $table->float('rp_non_mdu_dan_jasa');
-            $table->float('jasa');
-            $table->float('rp_total');
-            $table->string('klasifikasi');
+            $table->integer('rp_mdu')->nullable();
+            $table->integer('rp_non_mdu_dan_jasa')->nullable();
+            $table->integer('rp_jasa')->nullable();
+            $table->integer('rp_total')->nullable();
+            $table->string('klasifikasi')->nullable();
             $table->timestamps();
         });
     }

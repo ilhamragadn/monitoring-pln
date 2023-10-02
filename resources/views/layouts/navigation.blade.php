@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed top-0 z-40 w-screen bg-white dark:bg-gray-800">
+<nav x-data="{ open: false }" class="fixed top-0 z-40 left-12 w-screen bg-white dark:bg-gray-800">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -22,6 +22,10 @@
                         {{ __('MDU') }}
                     </x-nav-link>
                 </div> --}}
+                <div
+                    class="flex items-center ml-40 my-1 pl-4 text-white border-4 border-gray-800 border-l-red-600 rounded-l-lg">
+                    <h2 class="text-xl">@yield('page_title')</h2>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -131,9 +135,11 @@
             <li>
                 <x-dropdown-sidebar align="right" width="auto">
                     <x-slot name="trigger">
-                        <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('harga-pasang.index') || request()->routeIs('harga-bongkar.index')
-                            ? 'true'
-                            : 'false'">
+                        <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('harga-pasang.index') ||
+                            request()->routeIs('harga-bongkar.index') ||
+                            request()->routeIS('harga-pasang.create') ||
+                            request()->routeIS('harga-pasang.show') ||
+                            request()->routeIS('harga-pasang.edit')">
                             <span class="mx-auto py-2 flex ">
                                 {{ __('Daftar Harga') }}
                             </span>
@@ -147,16 +153,16 @@
                     <x-slot name="content">
                         <ul>
                             <li>
-                                <x-nav-link :href="route('harga-pasang.index')" class="text-xl px-4 py-1" :active="request()->routeIs('harga-pasang.index')">
+                                <x-nav-link :href="route('harga-pasang.index')" class="text-xl px-4 py-1" :active="request()->routeIs('harga-pasang.index') ||
+                                    request()->routeIS('harga-pasang.create') ||
+                                    request()->routeIS('harga-pasang.show')">
                                     <span class="mx-auto py-2 flex ">
                                         {{ __('Harga Pasang') }}
                                     </span>
                                 </x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link
-                                    class="text-xl px-4 py-1  hover:dark:bg-gray-500"
-                                    :active="request()->routeIs('harga')">
+                                <x-nav-link class="text-xl px-4 py-1  hover:dark:bg-gray-500" :active="request()->routeIs('harga')">
                                     <span class="mx-auto py-2 flex ">
                                         {{ __('Harga Bongkar') }}
                                     </span>

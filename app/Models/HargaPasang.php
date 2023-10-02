@@ -14,7 +14,7 @@ class HargaPasang extends Model
         'satuan',
         'rp_mdu',
         'rp_non_mdu_dan_jasa',
-        'jasa',
+        'rp_jasa',
         'rp_total',
         'klasifikasi'
     ];
