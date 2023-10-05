@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +27,23 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $roles = Auth::user()->role;
+        switch ($roles) {
+            case "Manager Perencanaan":
+                return redirect()->intended('/dashboard-mngr-ren');
+            case "Manager Unit":
+                return redirect()->intended('/dashboard-mngr-unit');
+            case "TL Rensis":
+                return redirect()->intended('/dashboard-tl-rensis');
+            case "TL Teknik":
+                return redirect()->intended('/dashboard-tl-teknik');
+            case "Pegawai":
+                return redirect()->intended('/dashboard-pegawai');
+            default:
+                return redirect()->intended('/unathorized');
+        }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        //return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

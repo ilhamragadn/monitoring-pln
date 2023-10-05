@@ -42,7 +42,7 @@
                 {{ __('Kembali') }}
             </x-primary-button>
             <x-update-button class="mb-6 mr-2 float-right"
-                href="{{ route('harga-pasang.edit', $dataHargaPasang->id) }}">
+                href="{{ route('hargapasang-mngr-ren.edit', $dataHargaPasang->id) }}">
                 {{ __('Edit Data') }}
             </x-update-button>
 
@@ -51,7 +51,8 @@
                 {{ __('Hapus Data') }}
             </x-danger-button>
             <x-modal class="flex items-center justify-center " name="confirm-data-harga-pasang-deletion" focusable>
-                <form method="post" action="{{ route('harga-pasang.destroy', $dataHargaPasang->id) }}" class="p-6">
+                <form method="post" action="{{ route('hargapasang-mngr-ren.destroy', $dataHargaPasang->id) }}"
+                    class="p-6">
                     @csrf
                     @method('delete')
                     <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">

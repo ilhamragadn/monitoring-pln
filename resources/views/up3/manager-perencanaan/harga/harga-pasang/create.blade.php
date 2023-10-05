@@ -2,7 +2,7 @@
 <x-app-layout>
     <div class="mt-16 p-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <form method="POST" action="{{ route('harga-pasang.store') }}">
+            <form method="POST" action="{{ route('hargapasang-mngr-ren.store') }}">
                 @csrf
                 <div class="grid grid-cols-2 gap-4 my-6">
                     <div>

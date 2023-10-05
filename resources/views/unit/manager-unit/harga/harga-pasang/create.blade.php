@@ -1,28 +1,25 @@
-@section('page_title', 'Ubah Data Harga Pasang')
+@section('page_title', 'Tambah Data Harga Pasang')
 <x-app-layout>
     <div class="mt-16 p-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <form method="POST" action="{{ route('harga-pasang.update', $dataHargaPasang->id) }}">
+            <form method="POST" action="{{ route('hargapasang-mngr-unit.store') }}">
                 @csrf
-                @method('PUT')
                 <div class="grid grid-cols-2 gap-4 my-6">
                     <div>
                         <x-input-label for="material" :value="__('Material')" />
                         <x-text-input id="material" class="block mt-1 w-full" type="text" name="material"
-                            value="{{ old('material', $dataHargaPasang->material) }}" required autofocus
-                            autocomplete="material" />
+                            :value="old('material')" required autofocus autocomplete="material" />
                         <x-input-error :messages="$errors->get('material')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="satuan" :value="__('Satuan')" />
                         <x-text-input id="satuan" class="block mt-1 w-full" type="text" name="satuan"
-                            value="{{ old('satuan', $dataHargaPasang->satuan) }}" required autocomplete="satuan" />
+                            :value="old('satuan')" required autocomplete="satuan" />
                         <x-input-error :messages="$errors->get('satuan')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="klasifikasi" :value="__('Klasifikasi')" />
-                        <x-select-input class="block mt-1 w-full" name="klasifikasi" id="klasifikasi"
-                            value="{{ old('klasifikasi', $dataHargaPasang->klasifikasi) }}">
+                        <x-select-input class="block mt-1 w-full" name="klasifikasi" id="klasifikasi">
                             <option value="JTM">JTM</option>
                             <option value="GTT">GTT</option>
                             <option value="KEYPOINT">KEYPOINT</option>
@@ -41,7 +38,7 @@
                                 <span class="text-gray-700 dark:text-gray-300">Rp. </span>
                             </div>
                             <x-text-input id="rp_jasa" class="block mt-1 w-full pl-10" type="text" name="rp_jasa"
-                                autocomplete="rp_jasa" value="{{ old('rp_jasa', $dataHargaPasang->rp_jasa) }}" />
+                                autocomplete="rp_jasa" />
                         </div>
                         <x-input-error :messages="$errors->get('rp_jasa')" class="mt-2" />
                     </div>
@@ -52,7 +49,7 @@
                                 <span class="text-gray-700 dark:text-gray-300">Rp. </span>
                             </div>
                             <x-text-input id="rp_mdu" class="block mt-1 w-full pl-10" type="text" name="rp_mdu"
-                                autocomplete="rp_mdu" value="{{ old('rp_mdu', $dataHargaPasang->rp_mdu) }}" />
+                                autocomplete="rp_mdu" />
                         </div>
                         <x-input-error :messages="$errors->get('rp_mdu')" class="mt-2" />
                     </div>
@@ -63,8 +60,7 @@
                                 <span class="text-gray-700 dark:text-gray-300">Rp. </span>
                             </div>
                             <x-text-input id="rp_non_mdu_dan_jasa" class="block mt-1 w-full pl-10" type="text"
-                                name="rp_non_mdu_dan_jasa" autocomplete="rp_non_mdu_dan_jasa"
-                                value="{{ old('rp_non_mdu_dan_jasa', $dataHargaPasang->rp_non_mdu_dan_jasa) }}" />
+                                name="rp_non_mdu_dan_jasa" autocomplete="rp_non_mdu_dan_jasa" />
                         </div>
                         <x-input-error :messages="$errors->get('rp_non_mdu_dan_jasa')" class="mt-2" />
                     </div>
@@ -75,8 +71,7 @@
                                 <span class="text-gray-700 dark:text-gray-300">Rp. </span>
                             </div>
                             <x-text-input id="rp_total" class="block mt-1 w-full pl-10" type="text" name="rp_total"
-                                autocomplete="rp_total" value="{{ old('rp_total', $dataHargaPasang->rp_total) }}"
-                                readonly />
+                                autocomplete="rp_total" readonly />
                         </div>
                         <x-input-error :messages="$errors->get('rp_total')" class="mt-2" />
                     </div>
@@ -86,7 +81,7 @@
                 </x-primary-button>
                 <button type="submit" class="mb-6 mr-2 float-right">
                     <x-success-button>
-                        {{ __('Perbarui Data') }}
+                        {{ __('Simpan') }}
                     </x-success-button>
                 </button>
             </form>
@@ -94,6 +89,8 @@
     </div>
 </x-app-layout>
 <script>
+    //KODE INI YANG JALAN
+    //Ambil elemen - elemen input yang memerlukan format angka ribuan
     const rp_mdu = document.getElementById('rp_mdu');
     const rp_jasa = document.getElementById('rp_jasa');
     const rp_non_mdu_dan_jasa = document.getElementById('rp_non_mdu_dan_jasa');

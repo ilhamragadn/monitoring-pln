@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Harga;
+namespace App\Http\Controllers\UP3\Manager_Perencanaan\Harga;
 
 use App\Http\Controllers\Controller;
 use App\Models\HargaPasang;
@@ -20,7 +20,7 @@ class HargaPasangController extends Controller
             return DataTables::of($dataHargaPasang)
                 ->addIndexColumn()
                 ->addColumn('tindakan', function ($row) {
-                    $act['show'] = route('harga-pasang.show', ['harga_pasang' => $row->id]);
+                    $act['show'] = route('hargapasang-mngr-ren.show', ['hargapasang_mngr_ren' => $row->id]);
                     $act['data'] = $row;
 
                     return view('components.detail-button', $act)->render();
@@ -29,7 +29,7 @@ class HargaPasangController extends Controller
                 // ->rawColumns(['tindakan'])
                 ->make(true);
         }
-        return view('harga.harga-pasang.index');
+        return view('up3.manager-perencanaan.harga.harga-pasang.index');
     }
 
     public function data()
@@ -43,7 +43,7 @@ class HargaPasangController extends Controller
     public function create()
     {
         //
-        return view('harga.harga-pasang.create');
+        return view('up3.manager-perencanaan.harga.harga-pasang.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class HargaPasangController extends Controller
         // Simpan dataHargaPasang ke database
         $dataHargaPasang->save();
 
-        return redirect()->route('harga-pasang.index')->with(['success' => 'Data Harga Pasang Berhasil Disimpan']);
+        return redirect()->route('hargapasang-mngr-ren.index')->with(['success' => 'Data Harga Pasang Berhasil Disimpan']);
     }
 
     /**
@@ -76,7 +76,7 @@ class HargaPasangController extends Controller
         //
         $dataHargaPasang = HargaPasang::findOrFail($id);
 
-        return view('harga.harga-pasang.show', compact('dataHargaPasang'));
+        return view('up3.manager-perencanaan.harga.harga-pasang.show', compact('dataHargaPasang'));
     }
 
     /**
@@ -86,7 +86,7 @@ class HargaPasangController extends Controller
     {
         //
         $dataHargaPasang = HargaPasang::findOrFail($id);
-        return view('harga.harga-pasang.edit', compact('dataHargaPasang'));
+        return view('up3.manager-perencanaan.harga.harga-pasang.edit', compact('dataHargaPasang'));
     }
 
     /**
@@ -110,7 +110,7 @@ class HargaPasangController extends Controller
             'rp_total' => intval(str_replace(['.'], '', $request->input('rp_total'))),
         ]);
 
-        return redirect()->route('harga-pasang.index')->with(['success' => 'Data Harga Pasang Berhasil Diperbarui']);
+        return redirect()->route('hargapasang-mngr-ren.index')->with(['success' => 'Data Harga Pasang Berhasil Diperbarui']);
     }
 
     /**
@@ -122,6 +122,6 @@ class HargaPasangController extends Controller
         $dataHargaPasang = HargaPasang::findOrFail($id);
 
         $dataHargaPasang->delete();
-        return redirect()->route('harga-pasang.index')->with(['success' => 'Data Harga Pasang Berhasil Dihapus']);
+        return redirect()->route('hargapasang-mngr-ren.index')->with(['success' => 'Data Harga Pasang Berhasil Dihapus']);
     }
 }

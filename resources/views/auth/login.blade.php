@@ -4,7 +4,7 @@
 
     <div>
         <a href="/">
-            <x-application-logo class="w-40 h-16 fill-current text-gray-500 mx-auto mb-10" />
+            <x-application-logo class="w-40 h-16 fill-current text-gray-500 mx-auto mb-6" />
         </a>
     </div>
 

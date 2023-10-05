@@ -83,11 +83,11 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-        </div>
+        </div> --}}
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -119,12 +119,151 @@
 <aside x-data="{ open: true }"
     class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white dark:bg-gray-800 border-r border-gray-100 sm:translate-x-0 dark:border-gray-700">
     <div class="h-full px-2 py-4 overflow-y-auto bg-white dark:bg-gray-800">
-        <div class="pb-2 border-b-2 border-indigo-400 dark:border-indigo-600">
-            <a href="{{ route('dashboard') }}">
-                <x-application-logo class="h-14 w-auto flex mx-auto fill-current text-gray-800 dark:text-gray-200" />
-            </a>
-        </div>
-        <ul class="mt-10 space-y-2 font-medium">
+        {{-- START UP3 --}}
+        {{-- START MANAGER PERENCANAAN --}}
+        @if (Auth::user()->role === 'Manager Perencanaan')
+            <div class="pb-2 border-b-2 border-indigo-400 dark:border-indigo-600">
+                <a href="{{ route('dashboard.mngr.perencanaan') }}">
+                    <x-application-logo
+                        class="h-14 w-auto flex mx-auto fill-current text-gray-800 dark:text-gray-200" />
+                </a>
+            </div>
+            <ul class="mt-10 space-y-2 font-medium">
+                <li>
+                    <x-nav-link :href="route('dashboard.mngr.perencanaan')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('dashboard.mngr.perencanaan')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Dashboard') }}
+                        </span>
+                    </x-nav-link>
+                </li>
+                <li>
+                    <x-dropdown-sidebar align="right" width="auto">
+                        <x-slot name="trigger">
+                            <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('hargapasang-mngr-ren.index') ||
+                                request()->routeIS('hargapasang-mngr-ren.create') ||
+                                request()->routeIS('hargapasang-mngr-ren.show') ||
+                                request()->routeIS('hargapasang-mngr-ren.edit') ||
+                                request()->routeIs('hargabongkar-mngr-ren.index') ||
+                                request()->routeIS('hargabongkar-mngr-ren.create') ||
+                                request()->routeIS('hargabongkar-mngr-ren.show') ||
+                                request()->routeIS('hargabongkar-mngr-ren.edit')">
+                                <span class="mx-auto py-2 flex ">
+                                    {{ __('Daftar Harga') }}
+                                </span>
+                                <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </x-nav-link>
+                        </x-slot>
+                        <x-slot name="content">
+                            <ul>
+                                <li>
+                                    <x-nav-link :href="route('hargapasang-mngr-ren.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargapasang-mngr-ren.index') ||
+                                        request()->routeIS('hargapasang-mngr-ren.create') ||
+                                        request()->routeIS('hargapasang-mngr-ren.show')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Pasang') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li>
+                                <li>
+                                    <x-nav-link :href="route('hargabongkar-mngr-ren.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargabongkar-mngr-ren.index') ||
+                                        request()->routeIS('hargabongkar-mngr-ren.create') ||
+                                        request()->routeIS('hargabongkar-mngr-ren.show')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Bongkar') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li>
+                            </ul>
+                        </x-slot>
+                    </x-dropdown-sidebar>
+                </li>
+            </ul>
+        @endif
+        {{-- END MANAGER PERENCANAAN --}}
+
+        {{-- START TL RENSIS --}}
+        @if (Auth::user()->role === 'TL Rensis')
+        @endif
+        {{-- END TL RENSIS --}}
+        {{-- END UP3 --}}
+
+        {{-- START UNIT --}}
+        {{-- START MANAGER UNIT --}}
+        @if (Auth::user()->role === 'Manager Unit')
+            <div class="pb-2 border-b-2 border-indigo-400 dark:border-indigo-600">
+                <a href="{{ route('dashboard.mngr.unit') }}">
+                    <x-application-logo
+                        class="h-14 w-auto flex mx-auto fill-current text-gray-800 dark:text-gray-200" />
+                </a>
+            </div>
+            <ul class="mt-10 space-y-2 font-medium">
+                <li>
+                    <x-nav-link :href="route('dashboard.mngr.unit')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('dashboard.mngr.unit')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Dashboard') }}
+                        </span>
+                    </x-nav-link>
+                </li>
+                <li>
+                    <x-dropdown-sidebar align="right" width="auto">
+                        <x-slot name="trigger">
+                            <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('hargapasang-mngr-unit.index') ||
+                                request()->routeIs('harga-bongkar.index') ||
+                                request()->routeIS('hargapasang-mngr-unit.create') ||
+                                request()->routeIS('hargapasang-mngr-unit.show') ||
+                                request()->routeIS('hargapasang-mngr-unit.edit')">
+                                <span class="mx-auto py-2 flex ">
+                                    {{ __('Daftar Harga') }}
+                                </span>
+                                <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </x-nav-link>
+                        </x-slot>
+                        <x-slot name="content">
+                            <ul>
+                                <li>
+                                    <x-nav-link :href="route('hargapasang-mngr-unit.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargapasang-mngr-unit.index') ||
+                                        request()->routeIS('hargapasang-mngr-unit.create') ||
+                                        request()->routeIS('hargapasang-mngr-unit.show')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Pasang') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li>
+                                <li>
+                                    <x-nav-link class="text-xl px-4 py-1  hover:dark:bg-gray-500" :active="request()->routeIs('harga')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Bongkar') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li>
+                            </ul>
+                        </x-slot>
+                    </x-dropdown-sidebar>
+                </li>
+            </ul>
+        @endif
+        {{-- END MANAGER UNIT --}}
+        {{-- START TL TEKNIK --}}
+        @if (Auth::user()->role === 'TL Teknik')
+        @endif
+        {{-- END TL TEKNIK --}}
+        {{-- END UNIT --}}
+
+        {{-- START PEGAWAI --}}
+        @if (Auth::user()->role === 'Pegawai')
+        @endif
+        {{-- END PEGAWAI --}}
+
+
+        {{-- <ul class="mt-10 space-y-2 font-medium">
             <li>
                 <x-nav-link :href="route('dashboard')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('dashboard')">
                     <span class="mx-auto py-2 flex">
@@ -173,7 +312,7 @@
                 </x-dropdown-sidebar>
             </li>
 
-        </ul>
+        </ul> --}}
 
     </div>
 </aside>
