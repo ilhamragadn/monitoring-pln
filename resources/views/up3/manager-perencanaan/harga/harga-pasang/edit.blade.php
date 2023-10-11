@@ -21,17 +21,34 @@
                     </div>
                     <div>
                         <x-input-label for="klasifikasi" :value="__('Klasifikasi')" />
-                        <x-select-input class="block mt-1 w-full" name="klasifikasi" id="klasifikasi"
-                            value="{{ old('klasifikasi', $dataHargaPasang->klasifikasi) }}">
-                            <option value="JTM">JTM</option>
-                            <option value="GTT">GTT</option>
-                            <option value="KEYPOINT">KEYPOINT</option>
-                            <option value="AKSESORIS JTM JTR">AKSESORIS JTM JTR</option>
-                            <option value="JTR">JTR</option>
-                            <option value="TIANG">TIANG</option>
-                            <option value="KONDUKTOR">KONDUKTOR</option>
-                            <option value="TERMINASI DAN JOINTING">TERMINASI DAN JOINTING</option>
-                            <option value="SR DAN APP">SR DAN APP</option>
+                        <x-select-input class="block mt-1 w-full" name="klasifikasi" id="klasifikasi">
+                            <option value="JTM"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'JTM' ? 'selected' : '' }}>JTM
+                            </option>
+                            <option value="GTT"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'GTT' ? 'selected' : '' }}>GTT
+                            </option>
+                            <option value="KEYPOINT"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'KEYPOINT' ? 'selected' : '' }}>
+                                KEYPOINT</option>
+                            <option value="AKSESORIS JTM JTR"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'AKSESORIS JTM JTR' ? 'selected' : '' }}>
+                                AKSESORIS JTM JTR</option>
+                            <option value="JTR"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'JTR' ? 'selected' : '' }}>JTR
+                            </option>
+                            <option value="TIANG"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'TIANG' ? 'selected' : '' }}>
+                                TIANG</option>
+                            <option value="KONDUKTOR"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'KONDUKTOR' ? 'selected' : '' }}>
+                                KONDUKTOR</option>
+                            <option value="TERMINASI DAN JOINTING"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'TERMINASI DAN JOINTING' ? 'selected' : '' }}>
+                                TERMINASI DAN JOINTING</option>
+                            <option value="SR DAN APP"
+                                {{ old('klasifikasi', $dataHargaPasang->klasifikasi) === 'SR DAN APP' ? 'selected' : '' }}>
+                                SR DAN APP</option>
                         </x-select-input>
                     </div>
                     <div>
@@ -94,6 +111,23 @@
     </div>
 </x-app-layout>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const rp_mdu = document.getElementById("rp_mdu");
+        const rp_jasa = document.getElementById("rp_jasa");
+        const rp_non_mdu_dan_jasa = document.getElementById("rp_non_mdu_dan_jasa");
+        const rp_total = document.getElementById("rp_total");
+
+        function formatRupiah(inputElement) {
+            let valueInput = inputElement.value;
+            let formattedValue = new Intl.NumberFormat("id-ID").format(valueInput);
+            inputElement.value = formattedValue;
+        }
+
+        formatRupiah(rp_mdu);
+        formatRupiah(rp_jasa);
+        formatRupiah(rp_total);
+        formatRupiah(rp_non_mdu_dan_jasa);
+    });
     const rp_mdu = document.getElementById('rp_mdu');
     const rp_jasa = document.getElementById('rp_jasa');
     const rp_non_mdu_dan_jasa = document.getElementById('rp_non_mdu_dan_jasa');

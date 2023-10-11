@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Unit\Manager_Unit\Harga\HargaPasangController as MNGRUnitHargaPasangController;
+use App\Http\Controllers\UP3\Manager_Perencanaan\Calon_Pelanggan\CalonPelangganController as MNGRUP3CalonPelangganController;
 use App\Http\Controllers\UP3\Manager_Perencanaan\Harga\HargaBongkarController as MNGRUP3HargaBongkarController;
 use App\Http\Controllers\UP3\Manager_Perencanaan\Harga\HargaPasangController as MNGRUP3HargaPasangController;
 use Illuminate\Support\Facades\Route;
@@ -30,9 +31,11 @@ Route::middleware(['auth', 'verified', 'checkrole:Manager Perencanaan'])->group(
 
     //redirect data harga
     Route::resource('/hargapasang-mngr-ren', MNGRUP3HargaPasangController::class);
+    Route::resource('/hargabongkar-mngr-ren', MNGRUP3HargaBongkarController::class);
     //Route::get('/harga-pasang/data', [HargaPasangController::class, 'data'])->name('harga-pasang.data');
 
-    Route::resource('/hargabongkar-mngr-ren', MNGRUP3HargaBongkarController::class);
+    //redirect data calon pelanggan
+    Route::resource('/capel-mngr-ren', MNGRUP3CalonPelangganController::class);
 
 
     //redirect to configure profile

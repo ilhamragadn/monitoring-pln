@@ -30,6 +30,7 @@
                             <option value="TERMINASI DAN JOINTING">TERMINASI DAN JOINTING</option>
                             <option value="SR DAN APP">SR DAN APP</option>
                         </x-select-input>
+                        <x-input-error :messages="$errors->get('klasifikasi')" class="mt-2" />
                     </div>
                     <div>
                         <x-input-label for="rp_jasa" :value="__('RP Jasa')" />

@@ -69,7 +69,6 @@
                     </div>
                 </form>
             </x-modal>
-
         </div>
     </div>
 </x-app-layout>

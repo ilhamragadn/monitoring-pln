@@ -136,6 +136,7 @@
                         </span>
                     </x-nav-link>
                 </li>
+
                 <li>
                     <x-dropdown-sidebar align="right" width="auto">
                         <x-slot name="trigger">
@@ -180,6 +181,16 @@
                             </ul>
                         </x-slot>
                     </x-dropdown-sidebar>
+                </li>
+                <li>
+                    <x-nav-link :href="route('capel-mngr-ren.index')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('capel-mngr-ren.index') ||
+                        request()->routeIs('capel-mngr-ren.create') ||
+                        request()->routeIs('capel-mngr-ren.show') ||
+                        request()->routeIs('capel-mngr-ren.edit')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Calon Pelanggan') }}
+                        </span>
+                    </x-nav-link>
                 </li>
             </ul>
         @endif

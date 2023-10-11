@@ -16,7 +16,7 @@
         <link href="https://cdn.datatables.net/1.13.6/css/dataTables.tailwindcss.min.css" rel="stylesheet">
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/datatable.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/table_hargapasang.js', 'resources/js/table_hargabongkar.js', 'resources/js/table_capel.js'])
 
     </head>
 

@@ -52,6 +52,11 @@ class HargaPasangController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'material' => 'required',
+            'satuan' => 'required',
+        ]);
+
         $dataHargaPasang = new HargaPasang();
         $dataHargaPasang->material = $request->input('material');
         $dataHargaPasang->satuan = $request->input('satuan');
