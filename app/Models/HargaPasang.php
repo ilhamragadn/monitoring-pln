@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class HargaPasang extends Model
 {
@@ -18,4 +21,19 @@ class HargaPasang extends Model
         'rp_total',
         'klasifikasi'
     ];
+
+    // public function permohonan(): HasMany
+    // {
+    //     return $this->hasMany(DataPermohonan::class);
+    // }
+
+    public function tlrensis(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id_tl_rensis');
+    }
+
+    public function pelanggan(): BelongsToMany
+    {
+        return $this->belongsToMany(DataPelanggan::class);
+    }
 }

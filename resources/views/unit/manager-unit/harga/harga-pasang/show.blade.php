@@ -41,34 +41,6 @@
             <x-primary-button onclick="window.history.back()" class="mb-6 mr-6 float-right">
                 {{ __('Kembali') }}
             </x-primary-button>
-            <x-update-button class="mb-6 mr-2 float-right"
-                href="{{ route('hargapasang-mngr-unit.edit', $dataHargaPasang->id) }}">
-                {{ __('Edit Data') }}
-            </x-update-button>
-
-            <x-danger-button x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirm-data-harga-pasang-deletion')">
-                {{ __('Hapus Data') }}
-            </x-danger-button>
-            <x-modal class="flex items-center justify-center " name="confirm-data-harga-pasang-deletion" focusable>
-                <form method="post" action="{{ route('hargapasang-mngr-unit.destroy', $dataHargaPasang->id) }}"
-                    class="p-6">
-                    @csrf
-                    @method('delete')
-                    <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                        {{ __('Apakah Anda yakin ingin menghapus data ini?') }}
-                    </h2>
-                    <div class="mt-6 flex justify-end">
-                        <x-secondary-button x-on:click="$dispatch('close')">
-                            {{ __('Batal') }}
-                        </x-secondary-button>
-
-                        <x-danger-button class="ml-3">
-                            {{ __('Hapus Data Harga Pasang') }}
-                        </x-danger-button>
-                    </div>
-                </form>
-            </x-modal>
 
         </div>
     </div>

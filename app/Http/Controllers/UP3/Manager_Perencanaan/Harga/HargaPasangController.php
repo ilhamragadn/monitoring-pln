@@ -12,29 +12,25 @@ class HargaPasangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        if ($request->ajax()) {
-            $dataHargaPasang = HargaPasang::all();
-            return DataTables::of($dataHargaPasang)
-                ->addIndexColumn()
-                ->addColumn('tindakan', function ($row) {
-                    $act['show'] = route('hargapasang-mngr-ren.show', ['hargapasang_mngr_ren' => $row->id]);
-                    $act['data'] = $row;
-
-                    return view('components.detail-button', $act)->render();
-                })
-                ->escapeColumns([])
-                // ->rawColumns(['tindakan'])
-                ->make(true);
-        }
         return view('up3.manager-perencanaan.harga.harga-pasang.index');
     }
 
-    public function data()
+    public function IndexDataHargaPasang()
     {
-        //
+        $dataHargaPasang = HargaPasang::all();
+        return DataTables::of($dataHargaPasang)
+            ->addIndexColumn()
+            ->addColumn('tindakan', function ($row) {
+                $act['show'] = route('hargapasang-mngr-ren.show', ['hargapasang_mngr_ren' => $row->id]);
+                $act['data'] = $row;
+
+                return view('components.detail-button', $act)->render();
+            })
+            ->escapeColumns([])
+            ->make(true);
     }
 
     /**
@@ -43,7 +39,6 @@ class HargaPasangController extends Controller
     public function create()
     {
         //
-        return view('up3.manager-perencanaan.harga.harga-pasang.create');
     }
 
     /**
@@ -52,25 +47,6 @@ class HargaPasangController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'material' => 'required',
-            'satuan' => 'required',
-        ]);
-
-        $dataHargaPasang = new HargaPasang();
-        $dataHargaPasang->material = $request->input('material');
-        $dataHargaPasang->satuan = $request->input('satuan');
-        $dataHargaPasang->klasifikasi = $request->input('klasifikasi');
-        // Mengkonversi dataHargaPasang harga dari string ke angka
-        $dataHargaPasang->rp_jasa = intval(str_replace(['.'], '', $request->input('rp_jasa')));
-        $dataHargaPasang->rp_mdu = intval(str_replace(['.'], '', $request->input('rp_mdu')));
-        $dataHargaPasang->rp_non_mdu_dan_jasa = intval(str_replace(['.'], '', $request->input('rp_non_mdu_dan_jasa')));
-        $dataHargaPasang->rp_total = intval(str_replace(['.'], '', $request->input('rp_total')));
-
-        // Simpan dataHargaPasang ke database
-        $dataHargaPasang->save();
-
-        return redirect()->route('hargapasang-mngr-ren.index')->with(['success' => 'Data Harga Pasang Berhasil Disimpan']);
     }
 
     /**
@@ -90,8 +66,6 @@ class HargaPasangController extends Controller
     public function edit($id)
     {
         //
-        $dataHargaPasang = HargaPasang::findOrFail($id);
-        return view('up3.manager-perencanaan.harga.harga-pasang.edit', compact('dataHargaPasang'));
     }
 
     /**
@@ -100,22 +74,6 @@ class HargaPasangController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-            'material' => 'required',
-            'satuan' => 'required',
-        ]);
-        $dataHargaPasang = HargaPasang::findOrFail($id);
-        $dataHargaPasang->update([
-            'material' => $request->input('material'),
-            'satuan' => $request->input('satuan'),
-            'klasifikasi' => $request->input('klasifikasi'),
-            'rp_jasa' => intval(str_replace(['.'], '', $request->input('rp_jasa'))),
-            'rp_mdu' => intval(str_replace(['.'], '', $request->input('rp_mdu'))),
-            'rp_non_mdu_dan_jasa' => intval(str_replace(['.'], '', $request->input('rp_non_mdu_dan_jasa'))),
-            'rp_total' => intval(str_replace(['.'], '', $request->input('rp_total'))),
-        ]);
-
-        return redirect()->route('hargapasang-mngr-ren.index')->with(['success' => 'Data Harga Pasang Berhasil Diperbarui']);
     }
 
     /**
@@ -124,9 +82,5 @@ class HargaPasangController extends Controller
     public function destroy($id)
     {
         //
-        $dataHargaPasang = HargaPasang::findOrFail($id);
-
-        $dataHargaPasang->delete();
-        return redirect()->route('hargapasang-mngr-ren.index')->with(['success' => 'Data Harga Pasang Berhasil Dihapus']);
     }
 }

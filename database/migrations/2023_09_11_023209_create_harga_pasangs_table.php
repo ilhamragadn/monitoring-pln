@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('harga_pasangs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_tl_rensis');
+            $table->foreign('id_tl_rensis')->on('users')->references('id')->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
             $table->string('material');
             $table->string('satuan');
             $table->integer('rp_mdu')->nullable();

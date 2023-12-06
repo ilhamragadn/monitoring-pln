@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="fixed top-0 z-40 left-12 w-screen bg-white dark:bg-gray-800">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-indigo-500 dark:border-b dark:border-indigo-500">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -22,8 +22,14 @@
                         {{ __('MDU') }}
                     </x-nav-link>
                 </div> --}}
-                <div
-                    class="flex items-center ml-40 my-1 pl-4 text-white border-4 border-gray-800 border-l-red-600 rounded-l-lg">
+                <div class="flex items-center ml-36 my-1 text-gray-900 dark:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="h-8 w-8 text-red-600 rounded-md px-1">
+                        <path fill-rule="evenodd"
+                            d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z"
+                            clip-rule="evenodd" />
+                    </svg>
+
                     <h2 class="text-xl">@yield('page_title')</h2>
                 </div>
             </div>
@@ -33,7 +39,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-gray-400 bg-transparent dark:bg-gray-800 hover:text-red-600 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div class="text-lg">{{ Auth::user()->name }}</div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -117,8 +123,9 @@
 </nav>
 
 <aside x-data="{ open: true }"
-    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white dark:bg-gray-800 border-r border-gray-100 sm:translate-x-0 dark:border-gray-700">
-    <div class="h-full px-2 py-4 overflow-y-auto bg-white dark:bg-gray-800">
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0">
+    <div
+        class="h-full px-2 py-4 overflow-y-auto bg-white dark:bg-gray-800 border-r border-indigo-600 dark:border-r dark:border-indigo-600">
         {{-- START UP3 --}}
         {{-- START MANAGER PERENCANAAN --}}
         @if (Auth::user()->role === 'Manager Perencanaan')
@@ -149,7 +156,7 @@
                                 request()->routeIS('hargabongkar-mngr-ren.show') ||
                                 request()->routeIS('hargabongkar-mngr-ren.edit')">
                                 <span class="mx-auto py-2 flex ">
-                                    {{ __('Daftar Harga') }}
+                                    {{ __('Harga Material') }}
                                 </span>
                                 <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
@@ -183,21 +190,91 @@
                     </x-dropdown-sidebar>
                 </li>
                 <li>
-                    <x-nav-link :href="route('capel-mngr-ren.index')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('capel-mngr-ren.index') ||
-                        request()->routeIs('capel-mngr-ren.create') ||
-                        request()->routeIs('capel-mngr-ren.show') ||
-                        request()->routeIs('capel-mngr-ren.edit')">
+                    <x-nav-link :href="route('pelanggan-mngr-ren.index')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('pelanggan-mngr-ren.index') ||
+                        request()->routeIs('pelanggan-mngr-ren.show')">
                         <span class="mx-auto py-2 flex">
-                            {{ __('Calon Pelanggan') }}
+                            {{ __('Data Pelanggan') }}
                         </span>
                     </x-nav-link>
                 </li>
+
             </ul>
         @endif
         {{-- END MANAGER PERENCANAAN --}}
 
         {{-- START TL RENSIS --}}
         @if (Auth::user()->role === 'TL Rensis')
+            <div class="pb-2 border-b-2 border-indigo-400 dark:border-indigo-600">
+                <a href="{{ route('dashboard.tl.rensis') }}">
+                    <x-application-logo class="h-14 w-auto flex mx-auto fill-current " />
+                </a>
+            </div>
+            <ul class="mt-10 space-y-2 font-medium">
+                <li>
+                    <x-nav-link :href="route('dashboard.tl.rensis')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('dashboard.tl.rensis')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Dashboard') }}
+                        </span>
+                    </x-nav-link>
+                </li>
+
+                <li>
+                    <x-dropdown-sidebar align="right" width="auto">
+                        <x-slot name="trigger">
+                            <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('hargapasang-tl-rensis.index') ||
+                                request()->routeIS('hargapasang-tl-rensis.create') ||
+                                request()->routeIS('hargapasang-tl-rensis.show') ||
+                                request()->routeIS('hargapasang-tl-rensis.edit') ||
+                                request()->routeIs('hargabongkar-tl-rensis.index') ||
+                                request()->routeIS('hargabongkar-tl-rensis.create') ||
+                                request()->routeIS('hargabongkar-tl-rensis.show') ||
+                                request()->routeIS('hargabongkar-tl-rensis.edit')">
+                                <span class="mx-auto py-2 flex ">
+                                    {{ __('Harga Material') }}
+                                </span>
+                                <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </x-nav-link>
+                        </x-slot>
+                        <x-slot name="content">
+                            <ul>
+                                <li>
+                                    <x-nav-link :href="route('hargapasang-tl-rensis.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargapasang-tl-rensis.index') ||
+                                        request()->routeIS('hargapasang-tl-rensis.create') ||
+                                        request()->routeIS('hargapasang-tl-rensis.show')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Pasang') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li>
+                                <li>
+                                    <x-nav-link :href="route('hargabongkar-tl-rensis.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargabongkar-tl-rensis.index') ||
+                                        request()->routeIS('hargabongkar-tl-rensis.create') ||
+                                        request()->routeIS('hargabongkar-tl-rensis.show')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Bongkar') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li>
+                            </ul>
+                        </x-slot>
+                    </x-dropdown-sidebar>
+                </li>
+                <li>
+                    <x-nav-link :href="route('pelanggan-tl-rensis.index')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('pelanggan-tl-rensis.index') ||
+                        request()->routeIs('pelanggan-tl-rensis.create') ||
+                        request()->routeIs('pelanggan-tl-rensis.show') ||
+                        request()->routeIs('pelanggan-tl-rensis.edit')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Data Pelanggan') }}
+                        </span>
+                    </x-nav-link>
+                </li>
+
+            </ul>
         @endif
         {{-- END TL RENSIS --}}
         {{-- END UP3 --}}
@@ -224,11 +301,9 @@
                         <x-slot name="trigger">
                             <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('hargapasang-mngr-unit.index') ||
                                 request()->routeIs('harga-bongkar.index') ||
-                                request()->routeIS('hargapasang-mngr-unit.create') ||
-                                request()->routeIS('hargapasang-mngr-unit.show') ||
-                                request()->routeIS('hargapasang-mngr-unit.edit')">
+                                request()->routeIS('hargapasang-mngr-unit.show')">
                                 <span class="mx-auto py-2 flex ">
-                                    {{ __('Daftar Harga') }}
+                                    {{ __('Harga Material') }}
                                 </span>
                                 <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
@@ -241,15 +316,89 @@
                             <ul>
                                 <li>
                                     <x-nav-link :href="route('hargapasang-mngr-unit.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargapasang-mngr-unit.index') ||
-                                        request()->routeIS('hargapasang-mngr-unit.create') ||
                                         request()->routeIS('hargapasang-mngr-unit.show')">
                                         <span class="mx-auto py-2 flex ">
                                             {{ __('Harga Pasang') }}
                                         </span>
                                     </x-nav-link>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <x-nav-link class="text-xl px-4 py-1  hover:dark:bg-gray-500" :active="request()->routeIs('harga')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Bongkar') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li> --}}
+                            </ul>
+                        </x-slot>
+                    </x-dropdown-sidebar>
+                </li>
+                <li>
+                    <x-nav-link :href="route('pelanggan-mngr-unit.index')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('pelanggan-mngr-unit.index') ||
+                        request()->routeIs('pelanggan-mngr-unit.show')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Data Pelanggan') }}
+                        </span>
+                    </x-nav-link>
+                </li>
+            </ul>
+        @endif
+        {{-- END MANAGER UNIT --}}
+
+
+        {{-- START TL TEKNIK --}}
+        @if (Auth::user()->role === 'TL Teknik')
+            <div class="pb-2 border-b-2 border-indigo-400 dark:border-indigo-600">
+                <a href="{{ route('dashboard.tl.teknik') }}">
+                    <x-application-logo
+                        class="h-14 w-auto flex mx-auto fill-current text-gray-800 dark:text-gray-200" />
+                </a>
+            </div>
+            <ul class="mt-10 space-y-2 font-medium">
+                <li>
+                    <x-nav-link :href="route('dashboard.tl.teknik')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('dashboard.tl.teknik')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Dashboard') }}
+                        </span>
+                    </x-nav-link>
+                </li>
+
+                <li>
+                    <x-dropdown-sidebar align="right" width="auto">
+                        <x-slot name="trigger">
+                            <x-nav-link class="mt-4 text-xl px-4 py-1 " :active="request()->routeIs('hargapasang-tl-teknik.index') ||
+                                request()->routeIS('hargapasang-tl-teknik.create') ||
+                                request()->routeIS('hargapasang-tl-teknik.show') ||
+                                request()->routeIS('hargapasang-tl-teknik.edit') ||
+                                request()->routeIs('hargabongkar-tl-teknik.index') ||
+                                request()->routeIS('hargabongkar-tl-teknik.create') ||
+                                request()->routeIS('hargabongkar-tl-teknik.show') ||
+                                request()->routeIS('hargabongkar-tl-teknik.edit')">
+                                <span class="mx-auto py-2 flex ">
+                                    {{ __('Harga Material') }}
+                                </span>
+                                <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </x-nav-link>
+                        </x-slot>
+                        <x-slot name="content">
+                            <ul>
+                                <li>
+                                    <x-nav-link :href="route('hargapasang-tl-teknik.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargapasang-tl-teknik.index') ||
+                                        request()->routeIS('hargapasang-tl-teknik.create') ||
+                                        request()->routeIS('hargapasang-tl-teknik.show')">
+                                        <span class="mx-auto py-2 flex ">
+                                            {{ __('Harga Pasang') }}
+                                        </span>
+                                    </x-nav-link>
+                                </li>
+                                <li>
+                                    <x-nav-link :href="route('hargabongkar-tl-teknik.index')" class="text-xl px-4 py-1" :active="request()->routeIs('hargabongkar-tl-teknik.index') ||
+                                        request()->routeIS('hargabongkar-tl-teknik.create') ||
+                                        request()->routeIS('hargabongkar-tl-teknik.show')">
                                         <span class="mx-auto py-2 flex ">
                                             {{ __('Harga Bongkar') }}
                                         </span>
@@ -259,11 +408,18 @@
                         </x-slot>
                     </x-dropdown-sidebar>
                 </li>
+                <li>
+                    <x-nav-link :href="route('pelanggan-tl-teknik.index')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('pelanggan-tl-teknik.index') ||
+                        request()->routeIs('pelanggan-tl-teknik.create') ||
+                        request()->routeIs('pelanggan-tl-teknik.show') ||
+                        request()->routeIs('pelanggan-tl-teknik.edit')">
+                        <span class="mx-auto py-2 flex">
+                            {{ __('Data Pelanggan') }}
+                        </span>
+                    </x-nav-link>
+                </li>
+
             </ul>
-        @endif
-        {{-- END MANAGER UNIT --}}
-        {{-- START TL TEKNIK --}}
-        @if (Auth::user()->role === 'TL Teknik')
         @endif
         {{-- END TL TEKNIK --}}
         {{-- END UNIT --}}
@@ -291,7 +447,7 @@
                             request()->routeIS('harga-pasang.show') ||
                             request()->routeIS('harga-pasang.edit')">
                             <span class="mx-auto py-2 flex ">
-                                {{ __('Daftar Harga') }}
+                                {{ __('Harga Material') }}
                             </span>
                             <svg class="fill-current h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
