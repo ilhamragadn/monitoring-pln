@@ -24,10 +24,9 @@ class DataPelangganController extends Controller
 
     public function IndexDataPelanggan()
     {
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
             ->leftJoin('users', 'users.id', '=', 'data_pelanggans.id_tl_rensis')
             ->leftJoin('users as tl_teknik', 'tl_teknik.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where('data_pelanggans.persetujuan_unit', 'SETUJU')
             ->where(function ($query) {
                 $query->where('data_pelanggans.persetujuan_rensis', 'SETUJU')
@@ -180,13 +179,9 @@ class DataPelangganController extends Controller
     public function show(Request $request, $id)
     {
         //
-        // $dataPelanggan = DataPelanggan::findOrFail($id);
-        // $dataPelangganPasang = $dataPelanggan->pasangmaterial;
-
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
             ->leftJoin('users', 'users.id', '=', 'data_pelanggans.id_tl_rensis')
             ->leftJoin('users as tl_teknik', 'tl_teknik.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where('data_pelanggans.persetujuan_unit', 'SETUJU')
             ->where(function ($query) {
                 $query->where('data_pelanggans.persetujuan_rensis', 'SETUJU')
@@ -358,13 +353,24 @@ class DataPelangganController extends Controller
             $dataPelanggan->pasangmaterial()->sync($pasangmaterial);
         }
 
+
         return redirect()->route('pelanggan-tl-rensis.index')->with(['success' => 'Data Pelanggan Berhasil Diperbarui']);
     }
 
     public function UpdateApprovalRensis(Request $request, $id)
     {
         //
-        $dataPelanggan = DataPelanggan::findOrFail($id);
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
+            ->leftJoin('users', 'users.id', '=', 'data_pelanggans.id_tl_rensis')
+            ->leftJoin('users as tl_teknik', 'tl_teknik.id', '=', 'data_pelanggans.id_tl_teknik')
+            ->where('data_pelanggans.persetujuan_unit', 'SETUJU')
+            ->where(function ($query) {
+                $query->where('data_pelanggans.persetujuan_rensis', 'SETUJU')
+                    ->orWhere('data_pelanggans.persetujuan_rensis', 'TUNGGU')
+                    ->orWhere('data_pelanggans.persetujuan_rensis', 'TOLAK');
+            })
+            ->where('data_pelanggans.id', $id)
+            ->first();
         $dataPelanggan->persetujuan_rensis = $request->persetujuan_rensis;
         $dataPelanggan->id_tl_rensis = $request->id_tl_rensis;
         $dataPelanggan->save();

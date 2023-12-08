@@ -1,7 +1,7 @@
-@section('page_title', 'Dashboard | ' . Auth::user()->role)
+@section('page_title', 'Dashboard')
 <x-app-layout>
     <div
-        class="max-w-7xl mx-auto mt-14 sm:px-6 lg:px-8 overflow-hidden shadow-sm p-4 bg-gradient-to-r from-red-500 to-amber-500 text-gray-100 sm:rounded-b-lg">
+        class="max-w-7xl sticky top-0 mx-auto sm:px-6 lg:px-8 overflow-hidden shadow-sm p-4 bg-gradient-to-r from-red-500 to-amber-500 text-gray-100 sm:rounded-b-lg">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <div class="mr-1">

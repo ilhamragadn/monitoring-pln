@@ -1,6 +1,6 @@
 @section('page_title', 'Tambah Data Harga Bongkar')
 <x-app-layout>
-    <div class="mt-16 p-4 ">
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <form method="POST" action="{{ route('hargabongkar-mngr-ren.store') }}">
                 @csrf
@@ -86,7 +86,7 @@
                 </button>
             </form>
         </div>
-    </div>
+
 </x-app-layout>
 <script>
     //KODE INI YANG JALAN

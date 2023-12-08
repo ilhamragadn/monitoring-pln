@@ -181,7 +181,7 @@ let tableDashboardPersetujuanRensis = new DataTable(
                     } else if (row.persetujuan_rensis == "TUNGGU") {
                         return (
                             '<h5 class="text-blue-500 font-semibold">' +
-                            row.persetujuan_rensis +
+                            "BELUM DIKONFIRMASI" +
                             "</h5>"
                         );
                     } else {
@@ -291,7 +291,7 @@ let tableDashboardRensisProgress = new DataTable("#dashboard-rensis-progress", {
                 } else if (row.persetujuan_unit == "TUNGGU") {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_unit +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else {
@@ -332,7 +332,7 @@ let tableDashboardRensisProgress = new DataTable("#dashboard-rensis-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_rensis +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else if (
@@ -341,7 +341,7 @@ let tableDashboardRensisProgress = new DataTable("#dashboard-rensis-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_rensis +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else {
@@ -371,7 +371,7 @@ let tableDashboardRensisProgress = new DataTable("#dashboard-rensis-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_ren +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else if (
@@ -380,7 +380,7 @@ let tableDashboardRensisProgress = new DataTable("#dashboard-rensis-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_ren +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else if (
@@ -412,7 +412,7 @@ let tableDashboardRensisProgress = new DataTable("#dashboard-rensis-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_ren +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else {
@@ -727,7 +727,7 @@ let tableDashboardTeknikProgress = new DataTable("#dashboard-teknik-progress", {
                 } else if (row.persetujuan_unit == "TUNGGU") {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_unit +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else {
@@ -768,7 +768,7 @@ let tableDashboardTeknikProgress = new DataTable("#dashboard-teknik-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_rensis +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else if (
@@ -777,7 +777,7 @@ let tableDashboardTeknikProgress = new DataTable("#dashboard-teknik-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_rensis +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else {
@@ -807,7 +807,7 @@ let tableDashboardTeknikProgress = new DataTable("#dashboard-teknik-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_ren +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else if (
@@ -816,7 +816,7 @@ let tableDashboardTeknikProgress = new DataTable("#dashboard-teknik-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_ren +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else if (
@@ -848,7 +848,7 @@ let tableDashboardTeknikProgress = new DataTable("#dashboard-teknik-progress", {
                 ) {
                     return (
                         '<h5 class="text-blue-500 font-semibold">' +
-                        row.persetujuan_ren +
+                        "BELUM DIKONFIRMASI" +
                         "</h5>"
                     );
                 } else {

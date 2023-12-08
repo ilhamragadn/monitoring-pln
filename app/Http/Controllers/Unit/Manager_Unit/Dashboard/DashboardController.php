@@ -18,9 +18,8 @@ class DashboardController extends Controller
     public function DashboardUnitTerkonfirmasi()
     {
         //
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_teknik_name')
             ->join('users', 'users.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where(function ($query) {
                 $query->where('data_pelanggans.persetujuan_unit', 'SETUJU')
                     ->orWhere('data_pelanggans.persetujuan_unit', 'TOLAK');
@@ -67,9 +66,8 @@ class DashboardController extends Controller
     public function DashboardUnitTunggu()
     {
         //
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_teknik_name')
             ->join('users', 'users.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where('data_pelanggans.persetujuan_unit', 'TUNGGU')
             ->get();
 

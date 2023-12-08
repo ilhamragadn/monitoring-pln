@@ -62,7 +62,7 @@ Route::middleware(['auth', 'verified', 'checkrole:Manager Perencanaan'])->group(
     Route::resource('/pelanggan-mngr-ren', MNGRUP3DataPelangganController::class);
     Route::get('/index-dapel-ren', [MNGRUP3DataPelangganController::class, 'IndexDataPelanggan'])->name('pelanggan-mngr-ren.index-dapel-ren');
     Route::get('/detail-dapel-ren/{id}', [MNGRUP3DataPelangganController::class, 'ShowDetailDataPelanggan'])->name('pelanggan-mngr-ren.detail-dapel-ren');
-    Route::post('/update-approve-dapel-ren/{id}', [MNGRUP3DataPelangganController::class, 'UpdateApprovalRen'])->name('pelanggan-mngr-ren.UpdateApprovalRen');
+    Route::put('/update-approve-dapel-ren/{id}', [MNGRUP3DataPelangganController::class, 'UpdateApprovalRen'])->name('pelanggan-mngr-ren.UpdateApprovalRen');
 
     //redirect to configure profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -114,7 +114,6 @@ Route::middleware(['auth', 'verified', 'checkrole:Manager Unit'])->group(functio
     Route::resource('/pelanggan-mngr-unit', MNGRUnitDataPelangganController::class);
     Route::get('/index-dapel-unit', [MNGRUnitDataPelangganController::class, 'IndexDataPelanggan'])->name('pelanggan-mngr-unit.index-dapel-unit');
     Route::get('/detail-dapel-unit/{id}', [MNGRUnitDataPelangganController::class, 'ShowDetailDataPelanggan'])->name('pelanggan-mngr-unit.detail-dapel-unit');
-    Route::post('/update-approve-dapel-unit/{id}', [MNGRUnitDataPelangganController::class, 'UpdateApprovalUnit'])->name('pelanggan-mngr-unit.UpdateApprovalUnit');
 
     //redirect to configure profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -147,7 +146,7 @@ Route::middleware(['auth', 'verified', 'checkrole:TL Rensis'])->group(function (
     Route::get('/detail-dapel-rensis/{id}', [TLRensisDataPelangganController::class, 'ShowDetailDataPelanggan'])->name('pelanggan-tl-rensis.detail-dapel-rensis');
     Route::post('/edit-dapel-rensis/{id}', [TLRensisDataPelangganController::class, 'EditDataPelanggan'])->name('pelanggan-tl-rensis.edit-dapel-rensis');
 
-    Route::post('/update-approve-dapel-rensis/{id}', [TLRensisDataPelangganController::class, 'UpdateApprovalRensis'])->name('pelanggan-tl-rensis.UpdateApprovalRensis');
+    Route::put('/update-approve-dapel-rensis/{id}', [TLRensisDataPelangganController::class, 'UpdateApprovalRensis'])->name('pelanggan-tl-rensis.UpdateApprovalRensis');
 
 
     //redirect to configure profile

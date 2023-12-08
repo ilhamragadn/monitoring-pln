@@ -26,21 +26,21 @@ class DataPelanggan extends Model
         'foto_survei'
     ];
 
-    public function managerunit(): BelongsTo
+    public function manager_unit(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_mngr_unit');
     }
 
-    public function managerren(): BelongsTo
+    public function manager_ren(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_mngr_ren');
     }
 
-    public function tlrensis(): BelongsTo
+    public function tl_rensis(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_tl_rensis');
     }
-    public function tlteknik(): BelongsTo
+    public function tl_teknik(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_tl_teknik');
     }
@@ -52,6 +52,6 @@ class DataPelanggan extends Model
     }
     public function bongkarmaterial(): BelongsToMany
     {
-        return $this->belongsToMany(HargaBongkar::class, 'pelanggan_bongkars', 'id_pelanggan', 'id_hargapasang')->withPivot(['banyak_material']);
+        return $this->belongsToMany(HargaBongkar::class, 'pelanggan_bongkars', 'id_pelanggan', 'id_hargabongkar')->withPivot(['banyak_material']);
     }
 }

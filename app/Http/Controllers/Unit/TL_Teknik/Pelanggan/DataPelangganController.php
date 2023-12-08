@@ -23,9 +23,8 @@ class DataPelangganController extends Controller
 
     public function IndexDataPelanggan()
     {
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_teknik_name')
             ->join('users', 'users.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->get();
 
         return DataTables::of($dataPelanggan)

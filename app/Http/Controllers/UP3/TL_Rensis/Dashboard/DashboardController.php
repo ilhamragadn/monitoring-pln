@@ -18,10 +18,9 @@ class DashboardController extends Controller
 
     public function DashboardPersetujuanRen()
     {
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
             ->leftJoin('users', 'users.id', '=', 'data_pelanggans.id_tl_rensis')
             ->leftJoin('users as tl_teknik', 'tl_teknik.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where('data_pelanggans.persetujuan_unit', 'SETUJU')
             ->where(function ($query) {
                 $query->where('data_pelanggans.persetujuan_rensis', 'SETUJU')
@@ -73,10 +72,9 @@ class DashboardController extends Controller
 
     public function DashboardPersetujuanRensis()
     {
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
             ->leftJoin('users', 'users.id', '=', 'data_pelanggans.id_tl_rensis')
             ->leftJoin('users as tl_teknik', 'tl_teknik.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where('data_pelanggans.persetujuan_unit', 'SETUJU')
             ->where(function ($query) {
                 $query->where('data_pelanggans.persetujuan_rensis', 'SETUJU')
@@ -124,10 +122,9 @@ class DashboardController extends Controller
 
     public function DashboardRensisProgress()
     {
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_rensis_name, tl_teknik.name as tl_teknik_name')
             ->leftJoin('users', 'users.id', '=', 'data_pelanggans.id_tl_rensis')
             ->leftJoin('users as tl_teknik', 'tl_teknik.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where('data_pelanggans.persetujuan_unit', 'SETUJU')
             ->where(function ($query) {
                 $query->where('data_pelanggans.persetujuan_rensis', 'SETUJU')

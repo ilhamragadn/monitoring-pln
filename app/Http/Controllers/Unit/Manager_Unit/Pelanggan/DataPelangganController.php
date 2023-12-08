@@ -22,9 +22,8 @@ class DataPelangganController extends Controller
     {
         //$dataPelanggan = DataPelanggan::all();
 
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_teknik_name')
             ->join('users', 'users.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->get();
 
         return DataTables::of($dataPelanggan)
@@ -81,31 +80,20 @@ class DataPelangganController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
         // $dataPelanggan = DataPelanggan::findOrFail($id);
         // $dataPelangganPasang = $dataPelanggan->pasangmaterial;
 
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_teknik_name')
             ->join('users', 'users.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where('data_pelanggans.id', $id)
             ->first();
 
         return view('unit.manager-unit.pelanggan.show', compact('dataPelanggan'));
     }
 
-    public function UpdateApprovalUnit(Request $request, $id)
-    {
-        //
-        $dataPelanggan = DataPelanggan::findOrFail($id);
-        $dataPelanggan->persetujuan_unit = $request->persetujuan_unit;
-        $dataPelanggan->id_mngr_unit = $request->id_mngr_unit;
-        $dataPelanggan->update();
-
-        return redirect()->route('pelanggan-mngr-unit.index')->with(['success' => 'Data Pelanggan Berhasil Diperbarui']);
-    }
 
     public function ShowDetailDataPelanggan($id)
     {
@@ -144,9 +132,14 @@ class DataPelangganController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         //
+        $dataPelanggan = DataPelanggan::findOrFail($id);
+        $dataPelanggan->persetujuan_unit = $request->persetujuan_unit;
+        $dataPelanggan->id_mngr_unit = $request->id_mngr_unit;
+        $dataPelanggan->save();
+        return redirect()->route('pelanggan-mngr-unit.index')->with(['success' => 'Data Pelanggan Berhasil Diperbarui']);
     }
 
     /**
