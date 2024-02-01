@@ -1,6 +1,6 @@
 @section('page_title', 'Tambah Data Pelanggan')
 <x-app-layout>
-    
+
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <form method="POST" action="{{ route('pelanggan-tl-rensis.store') }}" enctype="multipart/form-data">
             @csrf
@@ -189,13 +189,13 @@
                 <x-text-input id="foto_survei" name="foto_survei[]" class="block mt-1 p-2 w-full border"
                     type="file" multiple />
                 <small class="text-base text-red-600 dark:text-red-500 font-semibold">Dapat unggah lebih dari 1
-                    foto dengan ukuran maksimal setiap
-                    foto 3 MB</small>
+                    file foto atau pdf dengan ukuran maksimal setiap
+                    file 3 MB.</small>
                 <x-input-error :messages="$errors->get('foto_survei.*')" class="mt-2" />
             </div>
             <div class="my-4">
                 <x-input-label for="" :value="__('Pemesanan Material')" class="my-2" />
-                <div class="p-2 border rounded-md shadow-sm">
+                <div class="p-2 border border-gray-300 dark:border-none dark:bg-gray-900 rounded-md shadow-sm">
                     @include('up3.tl-rensis.pelanggan.tables.create-table-pasang')
                 </div>
             </div>

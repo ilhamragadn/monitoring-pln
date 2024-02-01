@@ -283,7 +283,7 @@
                     <x-application-logo />
                 </a>
             </div>
-            <ul class="mt-10 space-y-2 font-medium">
+            <ul class="mt-6 space-y-2 font-medium">
                 <li>
                     <x-nav-link :href="route('dashboard.mngr.perencanaan')" class="my-4 text-xl px-4 py-1" :active="request()->routeIs('dashboard.mngr.perencanaan')">
                         <span class="mx-auto py-2 flex">

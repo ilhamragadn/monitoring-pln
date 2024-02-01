@@ -1,6 +1,5 @@
 @section('page_title', 'Ubah Data Calon Pelanggan')
 <x-app-layout>
-
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <form method="POST" action="{{ route('pelanggan-tl-teknik.update', $dataPelanggan->id) }}"
             enctype="multipart/form-data">
@@ -335,16 +334,92 @@
             <div class="my-2">
                 <x-input-label for="foto_survei" :value="__('Gambar Survei Sebelumnya')" />
                 @if (!empty(json_decode($dataPelanggan->foto_survei)))
-                    <div class="grid grid-cols-2 gap-4 my-2">
-                        @foreach (json_decode($dataPelanggan->foto_survei) as $foto_survei)
-                            <img class="block w-full h-auto max-h-72 mb-2"
-                                src="{{ asset('storage/pelanggans/' . $foto_survei) }}" alt="Gambar Survei">
-                        @endforeach
+                    <div class="flex overflow-x-scroll hide-scroll-bar">
+                        <div class="flex flex-nowrap">
+                            @foreach (json_decode($dataPelanggan->foto_survei) as $foto_survei)
+                                <div class="inline-block p-2">
+                                    <div
+                                        class="p-2 w-64 h-64 max-w-xs overflow-hidden rounded-lg shadow-md border-gray-300 bg-gray-400 dark:bg-gray-900 hover:shadow-xl transition-shadow duration-300 ease-in-out ">
+                                        <div class="flex justify-center items-center h-full group/item">
+                                            <div>
+                                                <div class="flex justify-center items-center">
+                                                    @if (pathinfo($foto_survei, PATHINFO_EXTENSION) == 'pdf')
+                                                        <div class="relative">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 24 24" fill="currentColor"
+                                                                class="w-40 h-40 text-white dark:text-gray-800">
+                                                                <path
+                                                                    d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" />
+                                                                <path
+                                                                    d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                                                            </svg>
+                                                            <div
+                                                                class="absolute inset-0 flex items-center justify-center">
+                                                                <a class="flex items-center justify-center text-white font-medium group/edit invisible hover:bg-green-400 hover:text-black bg-gray-500 rounded-full py-2 px-4 group-hover/item:visible"
+                                                                    href="{{ route('download-survei-teknik', ['fileName' => $foto_survei]) }}"
+                                                                    target="_blank">
+                                                                    <span class="mr-2">Unduh</span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 24 24" fill="currentColor"
+                                                                        class="w-5 h-5">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+                                                                            clip-rule="evenodd" />
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="relative">
+                                                            <img class="max-h-40 p-1"
+                                                                src="{{ asset('storage/pelanggans/' . $foto_survei) }}"
+                                                                alt="Gambar Survei">
+                                                            <div
+                                                                class="absolute inset-0 flex items-center justify-center">
+                                                                <a class="flex items-center justify-center text-white font-medium group/edit invisible hover:bg-green-400 hover:text-black bg-gray-500 rounded-full py-2 px-4 group-hover/item:visible"
+                                                                    href="{{ route('download-survei-teknik', ['fileName' => $foto_survei]) }}"
+                                                                    target="_blank">
+                                                                    <span class="mr-2">Unduh</span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        viewBox="0 0 24 24" fill="currentColor"
+                                                                        class="w-5 h-5">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+                                                                            clip-rule="evenodd" />
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div
+                                                    class="text-white text-center py-1 mt-2 bg-gray-700 dark:bg-gray-800 rounded-md">
+                                                    <p>{{ $foto_survei }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 @else
-                    <x-text-input class="mt-1 block w-full" value="- Tidak Ada Gambar Hasil Survei." disabled />
+                    <x-text-input class="mt-1 block w-full" value="- Tidak Ada Gambar atau File Hasil Survei."
+                        disabled />
                 @endif
             </div>
+
+            <style>
+                .hide-scroll-bar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+
+                .hide-scroll-bar::-webkit-scrollbar {
+                    display: none;
+                }
+            </style>
+
             <div class="mt-2 mb-4">
                 <x-input-label for="foto_survei" :value="__('Update Gambar Survei')" />
                 <x-text-input id="foto_survei" name="foto_survei[]" class="block mt-1 p-2 w-full border"
@@ -354,9 +429,9 @@
                     foto 3 MB</small>
                 <x-input-error :messages="$errors->get('foto_survei.*')" class="mt-2" />
             </div>
-            <div class="my-2">
+            <div class="my-4">
                 <x-input-label for="" :value="__('Update Pemesanan Material')" class="my-2" />
-                <div class="p-2 border rounded-md shadow-sm">
+                <div class="p-2 border border-gray-300 dark:border-none dark:bg-gray-900 rounded-md shadow-sm">
                     @include('unit.tl-teknik.pelanggan.tables.edit-table-pasang')
                 </div>
             </div>

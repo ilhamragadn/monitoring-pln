@@ -16,9 +16,13 @@
                 <th scope="col" class="px-4 tracking-wider ">
                     Jumlah Pesanan</th>
                 <th scope="col" class="px-6 tracking-wider ">
-                    Total RP MDU</th>
+                    Jumlah RP MDU</th>
                 <th scope="col" class="px-6 tracking-wider ">
-                    Total RP Jasa</th>
+                    Total Jumlah RP MDU</th>
+                <th scope="col" class="px-6 tracking-wider ">
+                    Jumlah RP Jasa</th>
+                <th scope="col" class="px-6 tracking-wider ">
+                    Total Jumlah RP Jasa</th>
                 <th scope="col" class="px-4 tracking-wider ">
                     Nilai RAB (MDU)</th>
                 <th scope="col" class="px-4 tracking-wider ">

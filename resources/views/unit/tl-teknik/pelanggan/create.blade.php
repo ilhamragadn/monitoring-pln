@@ -195,7 +195,7 @@
             </div>
             <div class="my-4">
                 <x-input-label for="" :value="__('Pemesanan Material')" class="my-2" />
-                <div class="p-2 border rounded-md shadow-sm">
+                <div class="p-2 border border-gray-300 dark:border-none dark:bg-gray-900 rounded-md shadow-sm">
                     @include('unit.tl-teknik.pelanggan.tables.create-table-pasang')
                 </div>
             </div>

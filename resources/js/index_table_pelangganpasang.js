@@ -10,7 +10,7 @@ let tableIndexPelangganPasangTLRensis = new DataTable(
         scrollX: true,
         ajax: {
             url: base_url + "/index-dapel-rensis",
-            type: "get",
+            type: "post",
             dataType: "json",
             data: {
                 _token: web_token,
@@ -21,8 +21,16 @@ let tableIndexPelangganPasangTLRensis = new DataTable(
                 data: "DT_RowIndex",
                 name: "id",
                 searchable: false,
+                orderable: false,
                 className:
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="checkedOne" name="selected_data[]" value="' +
+                        row.id +
+                        '" type="checkbox" class="w-5 h-5 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-green-600 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />'
+                    );
+                },
             },
             {
                 data: "tindakan",
@@ -61,6 +69,18 @@ let tableIndexPelangganPasangTLRensis = new DataTable(
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
             },
             {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
                 data: "delta",
                 name: "delta",
                 className:
@@ -84,6 +104,43 @@ let tableIndexPelangganPasangTLRensis = new DataTable(
         ],
     }
 );
+
+tableIndexPelangganPasangTLRensis.on("init.dt", function () {
+    let checkedAll = document.getElementById("checkedAll");
+    let downloadButtonDapel = document.getElementById("downloadDapel");
+    let checkOne = document.querySelectorAll("#checkedOne");
+
+    checkedAll.addEventListener("change", function () {
+        if (this.checked) {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = true;
+                downloadButtonDapel.style.visibility = "visible";
+            });
+        } else {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = false;
+                downloadButtonDapel.style.visibility = "hidden";
+            });
+        }
+    });
+
+    checkOne.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+            let allChecked = true;
+            checkOne.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    allChecked = false;
+                }
+            });
+            checkedAll.checked = allChecked;
+            if (checkbox.checked) {
+                downloadButtonDapel.style.visibility = "visible";
+            } else {
+                downloadButtonDapel.style.visibility = "hidden";
+            }
+        });
+    });
+});
 
 let tableIndexPelangganPasangTLTeknik = new DataTable(
     "#index-pelangganpasang-teknik",
@@ -106,8 +163,16 @@ let tableIndexPelangganPasangTLTeknik = new DataTable(
                 data: "DT_RowIndex",
                 name: "id",
                 searchable: false,
+                orderable: false,
                 className:
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="checkedOne" name="selected_data[]" value="' +
+                        row.id +
+                        '" type="checkbox" class="w-5 h-5 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-green-600 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />'
+                    );
+                },
             },
             {
                 data: "tindakan",
@@ -146,6 +211,18 @@ let tableIndexPelangganPasangTLTeknik = new DataTable(
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
             },
             {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
                 data: "delta",
                 name: "delta",
                 className:
@@ -169,6 +246,43 @@ let tableIndexPelangganPasangTLTeknik = new DataTable(
         ],
     }
 );
+
+tableIndexPelangganPasangTLTeknik.on("init.dt", function () {
+    let checkedAll = document.getElementById("checkedAll");
+    let downloadButtonDapel = document.getElementById("downloadDapel");
+    let checkOne = document.querySelectorAll("#checkedOne");
+
+    checkedAll.addEventListener("change", function () {
+        if (this.checked) {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = true;
+                downloadButtonDapel.style.visibility = "visible";
+            });
+        } else {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = false;
+                downloadButtonDapel.style.visibility = "hidden";
+            });
+        }
+    });
+
+    checkOne.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+            let allChecked = true;
+            checkOne.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    allChecked = false;
+                }
+            });
+            checkedAll.checked = allChecked;
+            if (checkbox.checked) {
+                downloadButtonDapel.style.visibility = "visible";
+            } else {
+                downloadButtonDapel.style.visibility = "hidden";
+            }
+        });
+    });
+});
 
 let tableIndexPelangganPasangMNGRUnit = new DataTable(
     "#index-pelangganpasang-unit",
@@ -191,8 +305,16 @@ let tableIndexPelangganPasangMNGRUnit = new DataTable(
                 data: "DT_RowIndex",
                 name: "id",
                 searchable: false,
+                orderable: false,
                 className:
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="checkedOne" name="selected_data[]" value="' +
+                        row.id +
+                        '" type="checkbox" class="w-5 h-5 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-green-600 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />'
+                    );
+                },
             },
             {
                 data: "tindakan",
@@ -227,6 +349,18 @@ let tableIndexPelangganPasangMNGRUnit = new DataTable(
             {
                 data: "jenis_permohonan",
                 name: "jenis_permohonan",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
                 className:
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
             },
@@ -255,6 +389,43 @@ let tableIndexPelangganPasangMNGRUnit = new DataTable(
     }
 );
 
+tableIndexPelangganPasangMNGRUnit.on("init.dt", function () {
+    let checkedAll = document.getElementById("checkedAll");
+    let downloadButtonDapel = document.getElementById("downloadDapel");
+    let checkOne = document.querySelectorAll("#checkedOne");
+
+    checkedAll.addEventListener("change", function () {
+        if (this.checked) {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = true;
+                downloadButtonDapel.style.visibility = "visible";
+            });
+        } else {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = false;
+                downloadButtonDapel.style.visibility = "hidden";
+            });
+        }
+    });
+
+    checkOne.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+            let allChecked = true;
+            checkOne.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    allChecked = false;
+                }
+            });
+            checkedAll.checked = allChecked;
+            if (checkbox.checked) {
+                downloadButtonDapel.style.visibility = "visible";
+            } else {
+                downloadButtonDapel.style.visibility = "hidden";
+            }
+        });
+    });
+});
+
 let tableIndexPelangganPasangMNGRRen = new DataTable(
     "#index-pelangganpasang-ren",
     {
@@ -276,8 +447,16 @@ let tableIndexPelangganPasangMNGRRen = new DataTable(
                 data: "DT_RowIndex",
                 name: "id",
                 searchable: false,
+                orderable: false,
                 className:
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="checkedOne" name="selected_data[]" value="' +
+                        row.id +
+                        '" type="checkbox" class="w-5 h-5 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-green-600 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />'
+                    );
+                },
             },
             {
                 data: "tindakan",
@@ -316,6 +495,18 @@ let tableIndexPelangganPasangMNGRRen = new DataTable(
                     "whitespace-nowrap text-center border-b dark:border-slate-400",
             },
             {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
                 data: "delta",
                 name: "delta",
                 className:
@@ -339,3 +530,40 @@ let tableIndexPelangganPasangMNGRRen = new DataTable(
         ],
     }
 );
+
+tableIndexPelangganPasangMNGRRen.on("init.dt", function () {
+    let checkedAll = document.getElementById("checkedAll");
+    let downloadButtonDapel = document.getElementById("downloadDapel");
+    let checkOne = document.querySelectorAll("#checkedOne");
+
+    checkedAll.addEventListener("change", function () {
+        if (this.checked) {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = true;
+                downloadButtonDapel.style.visibility = "visible";
+            });
+        } else {
+            checkOne.forEach(function (checkbox) {
+                checkbox.checked = false;
+                downloadButtonDapel.style.visibility = "hidden";
+            });
+        }
+    });
+
+    checkOne.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+            let allChecked = true;
+            checkOne.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    allChecked = false;
+                }
+            });
+            checkedAll.checked = allChecked;
+            if (checkbox.checked) {
+                downloadButtonDapel.style.visibility = "visible";
+            } else {
+                downloadButtonDapel.style.visibility = "hidden";
+            }
+        });
+    });
+});

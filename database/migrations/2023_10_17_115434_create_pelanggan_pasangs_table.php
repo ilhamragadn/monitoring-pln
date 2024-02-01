@@ -20,11 +20,11 @@ return new class extends Migration
             $table->foreign('id_hargapasang')->on('harga_pasangs')->references('id')->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
             $table->integer('banyak_material')->nullable();
-            $table->integer('nilai_rab_mdu')->nullable();
-            $table->integer('nilai_rab_jasa')->nullable();
-            $table->float('ratio')->nullable();
-            $table->string('status')->nullable();
-            $table->string('keterangan')->nullable();
+            $table->integer('jumlah_total_mdu');
+            $table->integer('jumlah_total_jasa');
+            $table->integer('nilai_rab_mdu');
+            $table->integer('nilai_rab_jasa');
+            $table->float('ratio');
             $table->timestamps();
         });
     }

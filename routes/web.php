@@ -55,7 +55,6 @@ Route::middleware(['auth', 'verified', 'checkrole:Manager Perencanaan'])->group(
     //redirect data harga
     Route::resource('/hargapasang-mngr-ren', MNGRUP3HargaPasangController::class);
     Route::get('/index-hargapasang-ren', [MNGRUP3HargaPasangController::class, 'IndexDataHargaPasang'])->name('hargapasang-mngr-rem.index-hargapasang-ren');
-
     Route::resource('/hargabongkar-mngr-ren', MNGRUP3HargaBongkarController::class);
 
     //redirect data pelanggan
@@ -63,6 +62,8 @@ Route::middleware(['auth', 'verified', 'checkrole:Manager Perencanaan'])->group(
     Route::get('/index-dapel-ren', [MNGRUP3DataPelangganController::class, 'IndexDataPelanggan'])->name('pelanggan-mngr-ren.index-dapel-ren');
     Route::get('/detail-dapel-ren/{id}', [MNGRUP3DataPelangganController::class, 'ShowDetailDataPelanggan'])->name('pelanggan-mngr-ren.detail-dapel-ren');
     Route::put('/update-approve-dapel-ren/{id}', [MNGRUP3DataPelangganController::class, 'UpdateApprovalRen'])->name('pelanggan-mngr-ren.UpdateApprovalRen');
+    Route::get('/download-survei-ren/{fileName}', [MNGRUP3DataPelangganController::class, 'downloadSurvei'])->name('download-survei-ren');
+    Route::post('/download-dapel-ren', [MNGRUP3DataPelangganController::class, 'downloadData'])->name('download-dapel-ren.downloadData');
 
     //redirect to configure profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -82,7 +83,6 @@ Route::middleware(['auth', 'verified', 'checkrole:TL Teknik'])->group(function (
     Route::resource('/hargapasang-tl-teknik', TLTeknikHargaPasangController::class);
     Route::resource('/hargabongkar-tl-teknik', TLTeknikHargaBongkarController::class);
     Route::get('/index-hargapasang-teknik', [TLTeknikHargaPasangController::class, 'IndexDataHargaPasang'])->name('hargapasang-tl-teknik.index-hargapasang-teknik');
-    //Route::get('/harga-pasang/data', [MNGRUnitHargaPasangController::class, 'data'])->name('harga-pasang.data');
 
     //redirect data pelanggan
     Route::resource('/pelanggan-tl-teknik', TLTeknikDataPelangganController::class);
@@ -90,6 +90,8 @@ Route::middleware(['auth', 'verified', 'checkrole:TL Teknik'])->group(function (
     Route::post('/create-dapel-teknik', [TLTeknikDataPelangganController::class, 'AddDataPelanggan'])->name('pelanggan-tl-teknik.create-dapel-teknik');
     Route::get('/detail-dapel-teknik/{id}', [TLTeknikDataPelangganController::class, 'ShowDetailDataPelanggan'])->name('pelanggan-tl-teknik.detail-dapel-teknik');
     Route::post('/edit-dapel-teknik/{id}', [TLTeknikDataPelangganController::class, 'EditDataPelanggan'])->name('pelanggan-tl-teknik.edit-dapel-teknik');
+    Route::get('/download-survei-teknik/{fileName}', [TLTeknikDataPelangganController::class, 'downloadSurvei'])->name('download-survei-teknik');
+    Route::post('/download-dapel-teknik', [TLTeknikDataPelangganController::class, 'downloadData'])->name('download-dapel-teknik.downloadData');
 
     //redirect to configure profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -114,6 +116,8 @@ Route::middleware(['auth', 'verified', 'checkrole:Manager Unit'])->group(functio
     Route::resource('/pelanggan-mngr-unit', MNGRUnitDataPelangganController::class);
     Route::get('/index-dapel-unit', [MNGRUnitDataPelangganController::class, 'IndexDataPelanggan'])->name('pelanggan-mngr-unit.index-dapel-unit');
     Route::get('/detail-dapel-unit/{id}', [MNGRUnitDataPelangganController::class, 'ShowDetailDataPelanggan'])->name('pelanggan-mngr-unit.detail-dapel-unit');
+    Route::get('/download-survei-unit/{fileName}', [MNGRUnitDataPelangganController::class, 'downloadSurvei'])->name('download-survei-unit');
+    Route::post('/download-dapel-unit', [MNGRUnitDataPelangganController::class, 'downloadData'])->name('download-dapel-unit.downloadData');
 
     //redirect to configure profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -141,13 +145,13 @@ Route::middleware(['auth', 'verified', 'checkrole:TL Rensis'])->group(function (
 
     //redirect data pelanggan
     Route::resource('/pelanggan-tl-rensis', TLRensisDataPelangganController::class);
-    Route::get('/index-dapel-rensis', [TLRensisDataPelangganController::class, 'IndexDataPelanggan'])->name('pelanggan-tl-rensis.index-dapel-rensis');
+    Route::post('/index-dapel-rensis', [TLRensisDataPelangganController::class, 'IndexDataPelanggan'])->name('pelanggan-tl-rensis.index-dapel-rensis');
     Route::post('/create-dapel-rensis', [TLRensisDataPelangganController::class, 'AddDataPelanggan'])->name('pelanggan-tl-rensis.create-dapel-rensis');
     Route::get('/detail-dapel-rensis/{id}', [TLRensisDataPelangganController::class, 'ShowDetailDataPelanggan'])->name('pelanggan-tl-rensis.detail-dapel-rensis');
     Route::post('/edit-dapel-rensis/{id}', [TLRensisDataPelangganController::class, 'EditDataPelanggan'])->name('pelanggan-tl-rensis.edit-dapel-rensis');
-
     Route::put('/update-approve-dapel-rensis/{id}', [TLRensisDataPelangganController::class, 'UpdateApprovalRensis'])->name('pelanggan-tl-rensis.UpdateApprovalRensis');
-
+    Route::get('/download-survei-rensis/{fileName}', [TLRensisDataPelangganController::class, 'downloadSurvei'])->name('download-survei-rensis');
+    Route::post('/download-dapel-rensis', [TLRensisDataPelangganController::class, 'downloadData'])->name('download-dapel-rensis.downloadData');
 
     //redirect to configure profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

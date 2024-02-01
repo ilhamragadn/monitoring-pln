@@ -4,21 +4,71 @@
         $dataPelanggan->persetujuan_unit === 'SETUJU' &&
             $dataPelanggan->persetujuan_rensis == 'TUNGGU' &&
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
-        <form action="{{ route('pelanggan-tl-rensis.UpdateApprovalRensis', $dataPelanggan->id) }}" method="POST"
-            class="sticky top-2">
-            @csrf
-            @method('PUT')
+        <div class="sticky top-2 z-10">
             <div
                 class="max-w-7xl mx-auto mb-6 p-2 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
-                <x-danger-button id="persetujuan_rensis" name="persetujuan_rensis" value="TOLAK" class="float-right m-1">
+                <x-danger-button x-data=""
+                    x-on:click.prevent="$dispatch('open-modal', 'confirm-tolak-data-pelanggan')" class="float-right m-1">
                     {{ __('TOLAK') }}
-                    <input id="id_tl_rensis" type="hidden" name="id_tl_rensis" value="{{ Auth::user()->id }}" />
                 </x-danger-button>
+                <x-modal class="flex items-center justify-center" name="confirm-tolak-data-pelanggan" focusable>
+                    <form action="{{ route('pelanggan-tl-rensis.UpdateApprovalRensis', $dataPelanggan->id) }}"
+                        method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="p-6">
+                            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                {{ __('Cantumkan alasan penolakan dari data calon pelanggan ini.') }}
+                            </h2>
+                            <div>
+                                <x-textarea-input class="w-full m-2" id="alasan_tolak_rensis"
+                                    placeholder="Tuliskan alasan penolakannya disini" name="alasan_tolak_rensis"
+                                    required>
+                                </x-textarea-input>
+                            </div>
+                            <div class="mt-6 flex justify-end">
+                                <x-secondary-button x-on:click="$dispatch('close')">
+                                    {{ __('Batal') }}
+                                </x-secondary-button>
+                                <x-danger-button class="ml-3" id="persetujuan_rensis" name="persetujuan_rensis"
+                                    value="TOLAK">
+                                    {{ __('Tolak Data Calon Pelanggan') }}
+                                    <input id="id_tl_rensis" type="hidden" name="id_tl_rensis"
+                                        value="{{ Auth::user()->id }}" />
+                                </x-danger-button>
+                            </div>
+                        </div>
+                    </form>
+                </x-modal>
 
-                <x-safe-button id="persetujuan_rensis" name="persetujuan_rensis" value="SETUJU" class="float-right m-1">
+                <x-safe-button x-data=""
+                    x-on:click.prevent="$dispatch('open-modal', 'confirm-setuju-data-pelanggan')"
+                    class="float-right m-1">
                     {{ __('SETUJU') }}
-                    <input id="id_tl_rensis" type="hidden" name="id_tl_rensis" value="{{ Auth::user()->id }}" />
                 </x-safe-button>
+                <x-modal class="flex items-center justify-center" name="confirm-setuju-data-pelanggan" focusable>
+                    <form action="{{ route('pelanggan-tl-rensis.UpdateApprovalRensis', $dataPelanggan->id) }}"
+                        method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="p-6">
+                            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                {{ __('Apakah Anda yakin menyetujui data calon pelanggan ini?') }}
+                            </h2>
+                            <div class="mt-6 flex justify-end">
+                                <x-secondary-button x-on:click="$dispatch('close')">
+                                    {{ __('Batal') }}
+                                </x-secondary-button>
+                                <x-safe-button class="ml-3" id="persetujuan_rensis" name="persetujuan_rensis"
+                                    value="SETUJU">
+                                    {{ __('Setuju Data Calon Pelanggan') }}
+                                    <input id="id_tl_rensis" type="hidden" name="id_tl_rensis"
+                                        value="{{ Auth::user()->id }}" />
+                                </x-safe-button>
+                            </div>
+                        </div>
+                    </form>
+                </x-modal>
 
                 <div class="flex mt-1">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -33,7 +83,8 @@
                     </p>
                 </div>
             </div>
-        </form>
+
+        </div>
     @endif
 
     @if (
@@ -41,7 +92,7 @@
             $dataPelanggan->persetujuan_rensis == 'SETUJU' &&
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 @method('PUT')
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -62,7 +113,7 @@
             $dataPelanggan->persetujuan_rensis == 'TOLAK' &&
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 @method('PUT')
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -72,7 +123,9 @@
                         clip-rule="evenodd" />
                 </svg>
                 <p class="mt-1 font-medium text-sm text-sky-800 dark:text-sky-800">
-                    Data pelanggan berikut ini telah Anda tolak sebelumnya, terima kasih.
+                    Data pelanggan berikut ini telah Anda tolak sebelumnya dengan alasan: <br>
+                    - {{ $dataPelanggan->alasan_tolak_rensis }} <br>
+                    Terima kasih.
                 </p>
             </div>
         </div>
@@ -83,7 +136,7 @@
             $dataPelanggan->persetujuan_rensis == 'SETUJU' &&
             $dataPelanggan->persetujuan_ren == 'TOLAK')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 @method('PUT')
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -94,7 +147,9 @@
                 </svg>
                 <p class="mt-1 font-medium text-sm text-sky-800 dark:text-sky-800">
                     Mohon maaf. Data pelanggan berikut ini telah Anda setujui sebelumnya. Namun, telah ditolak oleh
-                    Manager Perencanaan, terima kasih.
+                    Manager Perencanaan dengan alasan: <br>
+                    - {{ $dataPelanggan->alasan_tolak_ren }} <br>
+                    Terima kasih.
                 </p>
             </div>
         </div>
@@ -105,7 +160,7 @@
             $dataPelanggan->persetujuan_rensis == 'SETUJU' &&
             $dataPelanggan->persetujuan_ren == 'SETUJU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 @method('PUT')
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -125,11 +180,14 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         @if ($dataPelanggan->tl_teknik_name != null)
             <x-input-label class="border-b-2 border-dashed m-1 text-lg text-center"
-                value="Penanggung Jawab: {{ $dataPelanggan->tl_teknik_name }}" />
-        @endif
-        @if ($dataPelanggan->tl_teknik_name == null)
+                value="Penanggung Jawab: {{ $dataPelanggan->tl_teknik_name }} sebagai {{ $dataPelanggan->tl_teknik_role }} {{ $dataPelanggan->tl_teknik_ulp }}" />
             <x-input-label class="border-b-2 border-dashed m-1 text-lg text-center"
-                value="Penanggung Jawab: {{ $dataPelanggan->tl_rensis_name }}" />
+                value="Tanggal dibuat: {{ $formatDate }}" />
+        @else
+            <x-input-label class="border-b-2 border-dashed m-1 text-lg text-center"
+                value="Penanggung Jawab: {{ $dataPelanggan->tl_rensis_name }} sebagai {{ $dataPelanggan->tl_rensis_role }}" />
+            <x-input-label class="border-b-2 border-dashed m-1 text-lg text-center"
+                value="Tanggal dibuat: {{ $formatDate }}" />
         @endif
         <div class="grid grid-cols-2 gap-4 my-6">
             <div>
@@ -241,25 +299,99 @@
                     value="{{ $dataPelanggan->tgl_pdl_pp }}" />
             </div>
         </div>
+
+
         <div class="mt-2 mb-4">
             <x-input-label for="foto_survei" :value="__('Hasil Gambar Survei')" />
             @if (!empty(json_decode($dataPelanggan->foto_survei)))
-                <div class="grid grid-cols-2 gap-4 my-2">
-                    @foreach (json_decode($dataPelanggan->foto_survei) as $foto_survei)
-                        <img class="block w-full h-auto max-h-72 mb-2"
-                            src="{{ asset('storage/pelanggans/' . $foto_survei) }}" alt="Gambar Survei">
-                    @endforeach
+                <div class="flex overflow-x-scroll hide-scroll-bar">
+                    <div class="flex flex-nowrap">
+                        @foreach (json_decode($dataPelanggan->foto_survei) as $foto_survei)
+                            <div class="inline-block p-2">
+                                <div
+                                    class="p-2 w-64 h-64 max-w-xs overflow-hidden rounded-lg shadow-md border-gray-300 bg-gray-400 dark:bg-gray-900 hover:shadow-xl transition-shadow duration-300 ease-in-out ">
+                                    <div class="flex justify-center items-center h-full group/item">
+                                        <div>
+                                            <div class="flex justify-center items-center">
+                                                @if (pathinfo($foto_survei, PATHINFO_EXTENSION) == 'pdf')
+                                                    <div class="relative">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor"
+                                                            class="w-40 h-40 text-white dark:text-gray-800">
+                                                            <path
+                                                                d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" />
+                                                            <path
+                                                                d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+                                                        </svg>
+                                                        <div class="absolute inset-0 flex items-center justify-center">
+                                                            <a class="flex items-center justify-center text-white font-medium group/edit invisible hover:bg-green-400 hover:text-black bg-gray-500 rounded-full py-2 px-4 group-hover/item:visible"
+                                                                href="{{ route('download-survei-rensis', ['fileName' => $foto_survei]) }}">
+                                                                <span class="mr-2">Unduh</span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24" fill="currentColor"
+                                                                    class="w-5 h-5">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="relative">
+                                                        <img class="max-h-40 p-1"
+                                                            src="{{ asset('storage/pelanggans/' . $foto_survei) }}"
+                                                            alt="Gambar Survei">
+                                                        <div class="absolute inset-0 flex items-center justify-center">
+                                                            <a class="flex items-center justify-center text-white font-medium group/edit invisible hover:bg-green-400 hover:text-black bg-gray-500 rounded-full py-2 px-4 group-hover/item:visible"
+                                                                href="{{ route('download-survei-rensis', ['fileName' => $foto_survei]) }}">
+                                                                <span class="mr-2">Unduh</span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24" fill="currentColor"
+                                                                    class="w-5 h-5">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+                                                                        clip-rule="evenodd" />
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div
+                                                class="text-white text-center py-1 mt-2 bg-gray-700 dark:bg-gray-800 rounded-md">
+                                                <p>{{ $foto_survei }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @else
-                <x-text-input class="mt-1 block w-full" value="- Tidak Ada Gambar Hasil Survei." disabled />
+                <x-text-input class="mt-1 block w-full" value="- Tidak Ada Gambar atau File Hasil Survei." disabled />
             @endif
         </div>
+
+        <style>
+            .hide-scroll-bar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            .hide-scroll-bar::-webkit-scrollbar {
+                display: none;
+            }
+        </style>
+
         <div class="my-4">
             <x-input-label for="" :value="__('Pemesanan Material')" class="my-2" />
-            <div class="p-2 border rounded-md shadow-sm">
+            <div class="p-2 border border-gray-300 dark:border-none dark:bg-gray-900 rounded-md shadow-sm">
                 @include('up3.tl-rensis.pelanggan.tables.detail-table-pasang')
             </div>
         </div>
+
         <x-primary-button onclick="window.history.back()" class="mb-6 mr-6 float-right">
             {{ __('Kembali') }}
         </x-primary-button>
@@ -274,7 +406,7 @@
                 x-on:click.prevent="$dispatch('open-modal', 'confirm-data-pelanggan-deletion')">
                 {{ __('Hapus Data') }}
             </x-danger-button>
-            <x-modal class="flex items-center justify-center " name="confirm-data-pelanggan-deletion" focusable>
+            <x-modal class="flex items-center justify-center" name="confirm-data-pelanggan-deletion" focusable>
                 <form method="post" action="{{ route('pelanggan-tl-rensis.destroy', $dataPelanggan->id) }}"
                     class="p-6">
                     @csrf

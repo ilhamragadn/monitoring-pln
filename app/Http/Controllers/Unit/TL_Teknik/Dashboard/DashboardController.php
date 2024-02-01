@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Unit\TL_Teknik\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataPelanggan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -17,9 +18,8 @@ class DashboardController extends Controller
 
     public function DashboardTeknikProgress()
     {
-        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, pelanggan_pasangs.*, users.name as tl_teknik_name')
+        $dataPelanggan = DataPelanggan::selectRaw('data_pelanggans.*, users.name as tl_teknik_name')
             ->join('users', 'users.id', '=', 'data_pelanggans.id_tl_teknik')
-            ->join('pelanggan_pasangs', 'pelanggan_pasangs.id_pelanggan', '=', 'data_pelanggans.id')
             ->where(function ($query) {
                 $query->where('data_pelanggans.persetujuan_unit', 'SETUJU')
                     ->orWhere('data_pelanggans.persetujuan_unit', 'TUNGGU')
@@ -35,6 +35,7 @@ class DashboardController extends Controller
                     ->orWhere('data_pelanggans.persetujuan_ren', 'TUNGGU')
                     ->orWhere('data_pelanggans.persetujuan_ren', 'TOLAK');
             })
+            ->with('pasangmaterial')
             ->get();
 
         return DataTables::of($dataPelanggan)
@@ -68,6 +69,17 @@ class DashboardController extends Controller
             })
             ->addColumn('persetujuan_ren', function ($row) {
                 return $row->persetujuan_ren;
+            })
+            ->addColumn('created_at', function ($row) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d-m-Y');
+                return $formatDate;
+            })
+            ->addColumn('ratio', function ($row) {
+                $ratios = [];
+                foreach ($row->pasangmaterial as $pasangmaterial) {
+                    $ratios[] = $pasangmaterial->pivot->ratio;
+                }
+                return end($ratios);
             })
             ->addColumn('delta', function ($row) {
                 return $row->delta;

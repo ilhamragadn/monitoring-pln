@@ -22,6 +22,10 @@
                 <th scope="col" class="px-4">
                     Persetujuan TL Rensis</th>
                 <th scope="col" class="px-6">
+                    Tanggal Dibuat</th>
+                <th scope="col" class="px-4">
+                    Ratio</th>
+                <th scope="col" class="px-6">
                     Delta</th>
                 <th scope="col" class="px-6">
                     Nilai BP</th>

@@ -82,6 +82,18 @@ let tableDashboardPersetujuanRen = new DataTable(
                 },
             },
             {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
                 data: "delta",
                 name: "delta",
                 className:
@@ -192,6 +204,18 @@ let tableDashboardPersetujuanRensis = new DataTable(
                         );
                     }
                 },
+            },
+            {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
             },
             {
                 data: "delta",
@@ -425,6 +449,18 @@ let tableDashboardRensisProgress = new DataTable("#dashboard-rensis-progress", {
             },
         },
         {
+            data: "created_at",
+            name: "created_at",
+            className:
+                "whitespace-nowrap text-center border-b dark:border-slate-400",
+        },
+        {
+            data: "ratio",
+            name: "ratio",
+            className:
+                "whitespace-nowrap text-center border-b dark:border-slate-400",
+        },
+        {
             data: "delta",
             name: "delta",
             className:
@@ -530,6 +566,18 @@ let tableDashboardUnitPersetujuanKonfirmasi = new DataTable(
                 },
             },
             {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
                 data: "delta",
                 name: "delta",
                 className:
@@ -628,6 +676,18 @@ let tableDashboardUnitPersetujuanTunggu = new DataTable(
                         );
                     }
                 },
+            },
+            {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
             },
             {
                 data: "delta",
@@ -861,6 +921,18 @@ let tableDashboardTeknikProgress = new DataTable("#dashboard-teknik-progress", {
             },
         },
         {
+            data: "created_at",
+            name: "created_at",
+            className:
+                "whitespace-nowrap text-center border-b dark:border-slate-400",
+        },
+        {
+            data: "ratio",
+            name: "ratio",
+            className:
+                "whitespace-nowrap text-center border-b dark:border-slate-400",
+        },
+        {
             data: "delta",
             name: "delta",
             className:
@@ -966,6 +1038,18 @@ let tableDashboardRenPersetujuanKonfirmasi = new DataTable(
                 },
             },
             {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
                 data: "delta",
                 name: "delta",
                 className:
@@ -1064,6 +1148,18 @@ let tableDashboardRenPersetujuanTunggu = new DataTable(
                         );
                     }
                 },
+            },
+            {
+                data: "created_at",
+                name: "created_at",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
+            },
+            {
+                data: "ratio",
+                name: "ratio",
+                className:
+                    "whitespace-nowrap text-center border-b dark:border-slate-400",
             },
             {
                 data: "delta",

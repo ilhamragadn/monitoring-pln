@@ -44,15 +44,32 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="mt-4">
-            <x-input-label for="role" :value="__('Choose Role')" />
-            <x-select-input id="role" class="block mt-1 w-full" name="role">
-                <option value="Manager Perencanaan">Manager Perencanaan</option>
-                <option value="Manager Unit">Manager Unit</option>
-                <option value="TL Rensis">TL Rensis</option>
-                <option value="TL Teknik">TL Teknik</option>
-                <option value="Pegawai">Pegawai</option>
-            </x-select-input>
+        <div class="grid grid-cols-2 gap-4 mt-4">
+            <div>
+                <x-input-label for="role" :value="__('Choose Role')" />
+                <x-select-input id="role" class="block mt-1 w-full" name="role">
+                    <option value="Manager Perencanaan">Manager Perencanaan</option>
+                    <option value="Manager Unit">Manager Unit</option>
+                    <option value="TL Rensis">TL Rensis</option>
+                    <option value="TL Teknik">TL Teknik</option>
+                </x-select-input>
+            </div>
+
+            <div>
+                <x-input-label for="ulp" :value="__('ULP')" />
+                <x-select-input class="block mt-1 w-full" name="ulp" id="ulp">
+                    <option value="ULP Bangil">ULP Bangil</option>
+                    <option value="ULP Gondang Wetan">ULP Gondang Wetan</option>
+                    <option value="ULP Grati">ULP Grati</option>
+                    <option value="ULP Kraksaan">ULP Kraksaan</option>
+                    <option value="ULP Pandaan">ULP Pandaan</option>
+                    <option value="ULP Pasuruan Kota">ULP Pasuruan Kota</option>
+                    <option value="ULP Prigen">ULP Prigen</option>
+                    <option value="ULP Probolinggo">ULP Probolinggo</option>
+                    <option value="ULP Sukorejo">ULP Sukorejo</option>
+                </x-select-input>
+                <x-input-error :messages="$errors->get('ulp')" class="mt-2" />
+            </div>
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -48,7 +48,7 @@ class DataPelanggan extends Model
 
     public function pasangmaterial(): BelongsToMany
     {
-        return $this->belongsToMany(HargaPasang::class, 'pelanggan_pasangs', 'id_pelanggan', 'id_hargapasang')->withPivot(['banyak_material', 'nilai_rab_mdu', 'nilai_rab_jasa', 'ratio'])->withTimestamps();
+        return $this->belongsToMany(HargaPasang::class, 'pelanggan_pasangs', 'id_pelanggan', 'id_hargapasang')->withPivot(['banyak_material', 'jumlah_total_mdu', 'jumlah_total_jasa', 'nilai_rab_mdu', 'nilai_rab_jasa', 'ratio'])->withTimestamps();
     }
     public function bongkarmaterial(): BelongsToMany
     {

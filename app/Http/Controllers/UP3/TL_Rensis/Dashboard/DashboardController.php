@@ -4,6 +4,7 @@ namespace App\Http\Controllers\UP3\TL_Rensis\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataPelanggan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -31,6 +32,7 @@ class DashboardController extends Controller
                 $query->where('data_pelanggans.persetujuan_ren', 'SETUJU')
                     ->orWhere('data_pelanggans.persetujuan_ren', 'TOLAK');
             })
+            ->with('pasangmaterial')
             ->get();
 
         return DataTables::of($dataPelanggan)
@@ -59,6 +61,17 @@ class DashboardController extends Controller
             ->addColumn('persetujuan_ren', function ($row) {
                 return $row->persetujuan_ren;
             })
+            ->addColumn('created_at', function ($row) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d-m-Y');
+                return $formatDate;
+            })
+            ->addColumn('ratio', function ($row) {
+                $ratios = [];
+                foreach ($row->pasangmaterial as $pasangmaterial) {
+                    $ratios[] = $pasangmaterial->pivot->ratio;
+                }
+                return end($ratios);
+            })
             ->addColumn('delta', function ($row) {
                 return $row->delta;
             })
@@ -81,6 +94,7 @@ class DashboardController extends Controller
                     ->orWhere('data_pelanggans.persetujuan_rensis', 'TUNGGU')
                     ->orWhere('data_pelanggans.persetujuan_rensis', 'TOLAK');
             })
+            ->with('pasangmaterial')
             ->get();
 
         return DataTables::of($dataPelanggan)
@@ -109,6 +123,17 @@ class DashboardController extends Controller
             ->addColumn('persetujuan_rensis', function ($row) {
                 return $row->persetujuan_rensis;
             })
+            ->addColumn('created_at', function ($row) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d-m-Y');
+                return $formatDate;
+            })
+            ->addColumn('ratio', function ($row) {
+                $ratios = [];
+                foreach ($row->pasangmaterial as $pasangmaterial) {
+                    $ratios[] = $pasangmaterial->pivot->ratio;
+                }
+                return end($ratios);
+            })
             ->addColumn('delta', function ($row) {
                 return $row->delta;
             })
@@ -136,6 +161,7 @@ class DashboardController extends Controller
                     ->orWhere('data_pelanggans.persetujuan_ren', 'TUNGGU')
                     ->orWhere('data_pelanggans.persetujuan_ren', 'TOLAK');
             })
+            ->with('pasangmaterial')
             ->get();
 
         return DataTables::of($dataPelanggan)
@@ -169,6 +195,17 @@ class DashboardController extends Controller
             })
             ->addColumn('persetujuan_ren', function ($row) {
                 return $row->persetujuan_ren;
+            })
+            ->addColumn('created_at', function ($row) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d-m-Y');
+                return $formatDate;
+            })
+            ->addColumn('ratio', function ($row) {
+                $ratios = [];
+                foreach ($row->pasangmaterial as $pasangmaterial) {
+                    $ratios[] = $pasangmaterial->pivot->ratio;
+                }
+                return end($ratios);
             })
             ->addColumn('delta', function ($row) {
                 return $row->delta;

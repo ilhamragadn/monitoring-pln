@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Unit\Manager_Unit\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataPelanggan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -52,6 +53,17 @@ class DashboardController extends Controller
             ->addColumn('persetujuan_unit', function ($row) {
                 return $row->persetujuan_unit;
             })
+            ->addColumn('created_at', function ($row) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d-m-Y');
+                return $formatDate;
+            })
+            ->addColumn('ratio', function ($row) {
+                $ratios = [];
+                foreach ($row->pasangmaterial as $pasangmaterial) {
+                    $ratios[] = $pasangmaterial->pivot->ratio;
+                }
+                return end($ratios);
+            })
             ->addColumn('delta', function ($row) {
                 return $row->delta;
             })
@@ -96,6 +108,17 @@ class DashboardController extends Controller
             })
             ->addColumn('persetujuan_unit', function ($row) {
                 return $row->persetujuan_unit;
+            })
+            ->addColumn('created_at', function ($row) {
+                $formatDate = Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d-m-Y');
+                return $formatDate;
+            })
+            ->addColumn('ratio', function ($row) {
+                $ratios = [];
+                foreach ($row->pasangmaterial as $pasangmaterial) {
+                    $ratios[] = $pasangmaterial->pivot->ratio;
+                }
+                return end($ratios);
             })
             ->addColumn('delta', function ($row) {
                 return $row->delta;

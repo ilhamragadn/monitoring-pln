@@ -1,12 +1,10 @@
 import DataTable from "datatables.net-dt";
 
 const showDapelId = window.location.pathname.split("/").pop();
+let jumlah_total_mdu = 0;
+let jumlah_total_jasa = 0;
 let nilai_rab_mdu = 0;
 let nilai_rab_jasa = 0;
-nilai_rab_jasa = new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-}).format(nilai_rab_jasa);
 let ratio = 0;
 
 let tableShowPelangganPasangTLRensis = new DataTable(
@@ -93,7 +91,7 @@ let tableShowPelangganPasangTLRensis = new DataTable(
             {
                 data: "total_rp_mdu",
                 name: "total_rp_mdu",
-                className: "text-center whitespace-nowrap",
+                className: "text-center",
                 render: function (data, type, row) {
                     return (
                         '<span id="total-rp-mdu">' +
@@ -102,6 +100,23 @@ let tableShowPelangganPasangTLRensis = new DataTable(
                             currency: "IDR",
                         }).format(data) +
                         "</span>"
+                    );
+                },
+            },
+            {
+                data: "jumlah_total_mdu",
+                name: "jumlah_total_mdu",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_mdu" name="jumlah_total_mdu[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_mdu) +
+                        '" />'
                     );
                 },
             },
@@ -117,6 +132,23 @@ let tableShowPelangganPasangTLRensis = new DataTable(
                             currency: "IDR",
                         }).format(data) +
                         "</span>"
+                    );
+                },
+            },
+            {
+                data: "jumlah_total_jasa",
+                name: "jumlah_total_jasa",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_jasa" name="jumlah_total_jasa[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_jasa) +
+                        '" />'
                     );
                 },
             },
@@ -177,10 +209,13 @@ tableShowPelangganPasangTLRensis.on("init.dt", function () {
     let banyak_material = document.querySelectorAll("#input-number");
     let total_mdu = document.querySelectorAll("#total-rp-mdu");
     let total_jasa = document.querySelectorAll("#total-rp-jasa");
+    let jumlahTotalMDU = document.querySelectorAll("#jumlah_total_mdu");
+    let jumlahTotalJASA = document.querySelectorAll("#jumlah_total_jasa");
     let RAB_MDU = document.querySelectorAll("#nilai_rab_mdu");
     let RAB_JASA = document.querySelectorAll("#nilai_rab_jasa");
     let Ratio = document.querySelectorAll("#ratio");
     let nilai_bp = document.getElementById("nilai_bp");
+
     checkbox.forEach(function (checkboxElement, index) {
         if (checkboxElement.checked) {
             const dataTable = tableShowPelangganPasangTLRensis
@@ -220,7 +255,12 @@ tableShowPelangganPasangTLRensis.on("init.dt", function () {
                 const parsedMDU = parseInt(cleanedMDU);
                 if (!isNaN(parsedMDU)) {
                     allTotalMDU += parsedMDU;
-                    //console.log(parsedMDU);
+                    jumlah_total_mdu = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalMDU);
+                    jumlahTotalMDU[index].value = jumlah_total_mdu;
+                    dataTable.jumlah_total_mdu = jumlah_total_mdu;
                 }
             }
             rab_MDU = Math.round(allTotalMDU * 1.11);
@@ -228,7 +268,6 @@ tableShowPelangganPasangTLRensis.on("init.dt", function () {
                 style: "currency",
                 currency: "IDR",
             }).format(rab_MDU);
-            //console.log(typeof nilai_rab_mdu);
             RAB_MDU[index].value = nilai_rab_mdu;
             dataTable.nilai_rab_mdu = nilai_rab_mdu;
 
@@ -240,8 +279,13 @@ tableShowPelangganPasangTLRensis.on("init.dt", function () {
                 const cleanedJASA = jasaValue.replace(/[^\d,]/g, "");
                 const parsedJASA = parseInt(cleanedJASA);
                 if (!isNaN(parsedJASA)) {
-                    //console.log(parsedJASA);
                     allTotalJASA += parsedJASA;
+                    jumlah_total_jasa = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalJASA);
+                    jumlahTotalJASA[index].value = jumlah_total_jasa;
+                    dataTable.jumlah_total_jasa = jumlah_total_jasa;
                 }
             }
             rab_JASA = Math.round(allTotalJASA * 1.11);
@@ -253,13 +297,17 @@ tableShowPelangganPasangTLRensis.on("init.dt", function () {
             dataTable.nilai_rab_jasa = nilai_rab_jasa;
 
             const totalAllRAB = rab_MDU + rab_JASA;
-            const ratioFormula = BPParse / totalAllRAB;
-            ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
-            if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
-                Ratio[index].value = ratio;
-                dataTable.ratio = ratio;
+            if (banyakMaterialVal == 0 && totalAllRAB == 0) {
+                Ratio[index].value = "0";
+                dataTable.ratio = "0";
+            } else {
+                const ratioFormula = BPParse / totalAllRAB;
+                ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
+                if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
+                    Ratio[index].value = ratio;
+                    dataTable.ratio = ratio;
+                }
             }
-            //console.log(ratio);
         }
     });
 });
@@ -361,6 +409,23 @@ let tableShowPelangganPasangTLTeknik = new DataTable(
                 },
             },
             {
+                data: "jumlah_total_mdu",
+                name: "jumlah_total_mdu",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_mdu" name="jumlah_total_mdu[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_mdu) +
+                        '" />'
+                    );
+                },
+            },
+            {
                 data: "total_rp_jasa",
                 name: "total_rp_jasa",
                 className: "text-center",
@@ -372,6 +437,23 @@ let tableShowPelangganPasangTLTeknik = new DataTable(
                             currency: "IDR",
                         }).format(data) +
                         "</span>"
+                    );
+                },
+            },
+            {
+                data: "jumlah_total_jasa",
+                name: "jumlah_total_jasa",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_jasa" name="jumlah_total_jasa[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_jasa) +
+                        '" />'
                     );
                 },
             },
@@ -432,6 +514,8 @@ tableShowPelangganPasangTLTeknik.on("init.dt", function () {
     let banyak_material = document.querySelectorAll("#input-number");
     let total_mdu = document.querySelectorAll("#total-rp-mdu");
     let total_jasa = document.querySelectorAll("#total-rp-jasa");
+    let jumlahTotalMDU = document.querySelectorAll("#jumlah_total_mdu");
+    let jumlahTotalJASA = document.querySelectorAll("#jumlah_total_jasa");
     let RAB_MDU = document.querySelectorAll("#nilai_rab_mdu");
     let RAB_JASA = document.querySelectorAll("#nilai_rab_jasa");
     let Ratio = document.querySelectorAll("#ratio");
@@ -475,7 +559,12 @@ tableShowPelangganPasangTLTeknik.on("init.dt", function () {
                 const parsedMDU = parseInt(cleanedMDU);
                 if (!isNaN(parsedMDU)) {
                     allTotalMDU += parsedMDU;
-                    //console.log(parsedMDU);
+                    jumlah_total_mdu = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalMDU);
+                    jumlahTotalMDU[index].value = jumlah_total_mdu;
+                    dataTable.jumlah_total_mdu = jumlah_total_mdu;
                 }
             }
             rab_MDU = Math.round(allTotalMDU * 1.11);
@@ -483,7 +572,6 @@ tableShowPelangganPasangTLTeknik.on("init.dt", function () {
                 style: "currency",
                 currency: "IDR",
             }).format(rab_MDU);
-            //console.log(typeof nilai_rab_mdu);
             RAB_MDU[index].value = nilai_rab_mdu;
             dataTable.nilai_rab_mdu = nilai_rab_mdu;
 
@@ -495,8 +583,13 @@ tableShowPelangganPasangTLTeknik.on("init.dt", function () {
                 const cleanedJASA = jasaValue.replace(/[^\d,]/g, "");
                 const parsedJASA = parseInt(cleanedJASA);
                 if (!isNaN(parsedJASA)) {
-                    //console.log(parsedJASA);
                     allTotalJASA += parsedJASA;
+                    jumlah_total_jasa = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalJASA);
+                    jumlahTotalJASA[index].value = jumlah_total_jasa;
+                    dataTable.jumlah_total_jasa = jumlah_total_jasa;
                 }
             }
             rab_JASA = Math.round(allTotalJASA * 1.11);
@@ -508,13 +601,17 @@ tableShowPelangganPasangTLTeknik.on("init.dt", function () {
             dataTable.nilai_rab_jasa = nilai_rab_jasa;
 
             const totalAllRAB = rab_MDU + rab_JASA;
-            const ratioFormula = BPParse / totalAllRAB;
-            ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
-            if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
-                Ratio[index].value = ratio;
-                dataTable.ratio = ratio;
+            if (banyakMaterialVal == 0 && totalAllRAB == 0) {
+                Ratio[index].value = "0";
+                dataTable.ratio = "0";
+            } else {
+                const ratioFormula = BPParse / totalAllRAB;
+                ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
+                if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
+                    Ratio[index].value = ratio;
+                    dataTable.ratio = ratio;
+                }
             }
-            //console.log(ratio);
         }
     });
 });
@@ -616,6 +713,23 @@ let tableShowPelangganPasangMNGRUnit = new DataTable(
                 },
             },
             {
+                data: "jumlah_total_mdu",
+                name: "jumlah_total_mdu",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_mdu" name="jumlah_total_mdu[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_mdu) +
+                        '" />'
+                    );
+                },
+            },
+            {
                 data: "total_rp_jasa",
                 name: "total_rp_jasa",
                 className: "text-center",
@@ -627,6 +741,23 @@ let tableShowPelangganPasangMNGRUnit = new DataTable(
                             currency: "IDR",
                         }).format(data) +
                         "</span>"
+                    );
+                },
+            },
+            {
+                data: "jumlah_total_jasa",
+                name: "jumlah_total_jasa",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_jasa" name="jumlah_total_jasa[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_jasa) +
+                        '" />'
                     );
                 },
             },
@@ -687,6 +818,8 @@ tableShowPelangganPasangMNGRUnit.on("init.dt", function () {
     let banyak_material = document.querySelectorAll("#input-number");
     let total_mdu = document.querySelectorAll("#total-rp-mdu");
     let total_jasa = document.querySelectorAll("#total-rp-jasa");
+    let jumlahTotalMDU = document.querySelectorAll("#jumlah_total_mdu");
+    let jumlahTotalJASA = document.querySelectorAll("#jumlah_total_jasa");
     let RAB_MDU = document.querySelectorAll("#nilai_rab_mdu");
     let RAB_JASA = document.querySelectorAll("#nilai_rab_jasa");
     let Ratio = document.querySelectorAll("#ratio");
@@ -730,7 +863,12 @@ tableShowPelangganPasangMNGRUnit.on("init.dt", function () {
                 const parsedMDU = parseInt(cleanedMDU);
                 if (!isNaN(parsedMDU)) {
                     allTotalMDU += parsedMDU;
-                    //console.log(parsedMDU);
+                    jumlah_total_mdu = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalMDU);
+                    jumlahTotalMDU[index].value = jumlah_total_mdu;
+                    dataTable.jumlah_total_mdu = jumlah_total_mdu;
                 }
             }
             rab_MDU = Math.round(allTotalMDU * 1.11);
@@ -738,7 +876,6 @@ tableShowPelangganPasangMNGRUnit.on("init.dt", function () {
                 style: "currency",
                 currency: "IDR",
             }).format(rab_MDU);
-            //console.log(typeof nilai_rab_mdu);
             RAB_MDU[index].value = nilai_rab_mdu;
             dataTable.nilai_rab_mdu = nilai_rab_mdu;
 
@@ -750,8 +887,13 @@ tableShowPelangganPasangMNGRUnit.on("init.dt", function () {
                 const cleanedJASA = jasaValue.replace(/[^\d,]/g, "");
                 const parsedJASA = parseInt(cleanedJASA);
                 if (!isNaN(parsedJASA)) {
-                    //console.log(parsedJASA);
                     allTotalJASA += parsedJASA;
+                    jumlah_total_jasa = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalJASA);
+                    jumlahTotalJASA[index].value = jumlah_total_jasa;
+                    dataTable.jumlah_total_jasa = jumlah_total_jasa;
                 }
             }
             rab_JASA = Math.round(allTotalJASA * 1.11);
@@ -763,13 +905,17 @@ tableShowPelangganPasangMNGRUnit.on("init.dt", function () {
             dataTable.nilai_rab_jasa = nilai_rab_jasa;
 
             const totalAllRAB = rab_MDU + rab_JASA;
-            const ratioFormula = BPParse / totalAllRAB;
-            ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
-            if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
-                Ratio[index].value = ratio;
-                dataTable.ratio = ratio;
+            if (banyakMaterialVal == 0 && totalAllRAB == 0) {
+                Ratio[index].value = "0";
+                dataTable.ratio = "0";
+            } else {
+                const ratioFormula = BPParse / totalAllRAB;
+                ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
+                if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
+                    Ratio[index].value = ratio;
+                    dataTable.ratio = ratio;
+                }
             }
-            //console.log(ratio);
         }
     });
 });
@@ -871,6 +1017,23 @@ let tableShowPelangganPasangMNGRRen = new DataTable(
                 },
             },
             {
+                data: "jumlah_total_mdu",
+                name: "jumlah_total_mdu",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_mdu" name="jumlah_total_mdu[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_mdu) +
+                        '" />'
+                    );
+                },
+            },
+            {
                 data: "total_rp_jasa",
                 name: "total_rp_jasa",
                 className: "text-center",
@@ -882,6 +1045,23 @@ let tableShowPelangganPasangMNGRRen = new DataTable(
                             currency: "IDR",
                         }).format(data) +
                         "</span>"
+                    );
+                },
+            },
+            {
+                data: "jumlah_total_jasa",
+                name: "jumlah_total_jasa",
+                className: "text-center",
+                render: function (data, type, row) {
+                    return (
+                        '<input id="jumlah_total_jasa" name="jumlah_total_jasa[' +
+                        row.id +
+                        ']" class="w-40 bg-transparent border-transparent rounded-md text-center text-sm" readonly value="' +
+                        new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                        }).format(row.jumlah_total_jasa) +
+                        '" />'
                     );
                 },
             },
@@ -942,6 +1122,8 @@ tableShowPelangganPasangMNGRRen.on("init.dt", function () {
     let banyak_material = document.querySelectorAll("#input-number");
     let total_mdu = document.querySelectorAll("#total-rp-mdu");
     let total_jasa = document.querySelectorAll("#total-rp-jasa");
+    let jumlahTotalMDU = document.querySelectorAll("#jumlah_total_mdu");
+    let jumlahTotalJASA = document.querySelectorAll("#jumlah_total_jasa");
     let RAB_MDU = document.querySelectorAll("#nilai_rab_mdu");
     let RAB_JASA = document.querySelectorAll("#nilai_rab_jasa");
     let Ratio = document.querySelectorAll("#ratio");
@@ -985,7 +1167,12 @@ tableShowPelangganPasangMNGRRen.on("init.dt", function () {
                 const parsedMDU = parseInt(cleanedMDU);
                 if (!isNaN(parsedMDU)) {
                     allTotalMDU += parsedMDU;
-                    //console.log(parsedMDU);
+                    jumlah_total_mdu = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalMDU);
+                    jumlahTotalMDU[index].value = jumlah_total_mdu;
+                    dataTable.jumlah_total_mdu = jumlah_total_mdu;
                 }
             }
             rab_MDU = Math.round(allTotalMDU * 1.11);
@@ -993,7 +1180,6 @@ tableShowPelangganPasangMNGRRen.on("init.dt", function () {
                 style: "currency",
                 currency: "IDR",
             }).format(rab_MDU);
-            //console.log(typeof nilai_rab_mdu);
             RAB_MDU[index].value = nilai_rab_mdu;
             dataTable.nilai_rab_mdu = nilai_rab_mdu;
 
@@ -1005,8 +1191,13 @@ tableShowPelangganPasangMNGRRen.on("init.dt", function () {
                 const cleanedJASA = jasaValue.replace(/[^\d,]/g, "");
                 const parsedJASA = parseInt(cleanedJASA);
                 if (!isNaN(parsedJASA)) {
-                    //console.log(parsedJASA);
                     allTotalJASA += parsedJASA;
+                    jumlah_total_jasa = new Intl.NumberFormat("id-ID", {
+                        style: "currency",
+                        currency: "IDR",
+                    }).format(allTotalJASA);
+                    jumlahTotalJASA[index].value = jumlah_total_jasa;
+                    dataTable.jumlah_total_jasa = jumlah_total_jasa;
                 }
             }
             rab_JASA = Math.round(allTotalJASA * 1.11);
@@ -1018,13 +1209,17 @@ tableShowPelangganPasangMNGRRen.on("init.dt", function () {
             dataTable.nilai_rab_jasa = nilai_rab_jasa;
 
             const totalAllRAB = rab_MDU + rab_JASA;
-            const ratioFormula = BPParse / totalAllRAB;
-            ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
-            if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
-                Ratio[index].value = ratio;
-                dataTable.ratio = ratio;
+            if (banyakMaterialVal == 0 && totalAllRAB == 0) {
+                Ratio[index].value = "0";
+                dataTable.ratio = "0";
+            } else {
+                const ratioFormula = BPParse / totalAllRAB;
+                ratio = new Intl.NumberFormat("id-ID").format(ratioFormula);
+                if (!isNaN(totalAllRAB) && !isNaN(ratioFormula)) {
+                    Ratio[index].value = ratio;
+                    dataTable.ratio = ratio;
+                }
             }
-            //console.log(ratio);
         }
     });
 });

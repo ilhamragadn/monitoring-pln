@@ -38,7 +38,8 @@ class RegisteredUserController extends Controller
                 if (!in_array($value, $validRoles)) {
                     $fail($attribute . ' is invalid.');
                 }
-            }]
+            }],
+            'ulp' => ['string']
         ]);
 
         $user = User::create([
@@ -46,6 +47,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'ulp' => $request->ulp,
         ]);
 
         event(new Registered($user));

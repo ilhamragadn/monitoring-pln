@@ -32,6 +32,9 @@ return new class extends Migration
             $table->enum('persetujuan_unit', ['TUNGGU', 'SETUJU', 'TOLAK'])->default('TUNGGU');
             $table->enum('persetujuan_ren', ['TUNGGU', 'SETUJU', 'TOLAK'])->default('TUNGGU');
             $table->enum('persetujuan_rensis', ['TUNGGU', 'SETUJU', 'TOLAK'])->default('TUNGGU');
+            $table->string('alasan_tolak_unit');
+            $table->string('alasan_tolak_ren');
+            $table->string('alasan_tolak_rensis');
             $table->enum('jenis_permohonan', ['Perubahan Daya', 'Pasang Baru', 'Migrasi']);
             $table->enum('ulp', ['ULP Bangil', 'ULP Gondang Wetan', 'ULP Grati', 'ULP Kraksaan', 'ULP Pandaan', 'ULP Pasuruan Kota', 'ULP Prigen', 'ULP Probolinggo', 'ULP Sukorejo']);
             $table->string('tarif_lama')->nullable();
