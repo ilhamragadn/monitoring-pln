@@ -53,7 +53,7 @@ return new class extends Migration
             $table->date('tgl_register_pp')->nullable();
             $table->date('tgl_bayar_pp')->nullable();
             $table->date('tgl_pdl_pp')->nullable();
-            $table->string('foto_survei')->nullable();
+            $table->string('foto_survei', 1000)->nullable();
             $table->timestamps();
         });
     }
