@@ -6,11 +6,37 @@
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
         <div class="sticky top-2 z-10">
             <div
-                class="max-w-7xl mx-auto mb-6 p-2 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
-                <x-danger-button x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-tolak-data-pelanggan')" class="float-right m-1">
-                    {{ __('TOLAK') }}
-                </x-danger-button>
+                class="max-w-7xl mx-auto mb-6 p-2 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+                <div class="lg:grid grid-cols-3">
+                    <div class="col-span-2">
+                        <div class="flex my-1 mx-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-6 h-6 float-left m-1 text-sky-800 dark:text-sky-800">
+                                <path fill-rule="evenodd"
+                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <p class="lg:mt-2 sm:mt-1 font-medium text-sm text-sky-800 dark:text-sky-800">
+                                Jika Anda yakin dengan data pelanggan berikut ini, Anda dapat menyetujuinya agar dapat
+                                ditindaklanjuti.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-span-1">
+                        <div class="lg:justify-end flex justify-center items-center mt-1">
+                            <x-danger-button x-data=""
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-tolak-data-pelanggan')"
+                                class="m-1">
+                                {{ __('TOLAK') }}
+                            </x-danger-button>
+                            <x-safe-button x-data=""
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-setuju-data-pelanggan')"
+                                class="m-1">
+                                {{ __('SETUJU') }}
+                            </x-safe-button>
+                        </div>
+                    </div>
+                </div>
                 <x-modal class="flex items-center justify-center" name="confirm-tolak-data-pelanggan" focusable>
                     <form action="{{ route('pelanggan-mngr-unit.update', $dataPelanggan->id) }}" method="POST">
                         @csrf
@@ -37,12 +63,6 @@
                         </div>
                     </form>
                 </x-modal>
-
-                <x-safe-button x-data=""
-                    x-on:click.prevent="$dispatch('open-modal', 'confirm-setuju-data-pelanggan')"
-                    class="float-right m-1">
-                    {{ __('SETUJU') }}
-                </x-safe-button>
                 <x-modal class="flex items-center justify-center" name="confirm-setuju-data-pelanggan" focusable>
                     <form action="{{ route('pelanggan-mngr-unit.update', $dataPelanggan->id) }}" method="POST">
                         @csrf
@@ -65,29 +85,14 @@
                         </div>
                     </form>
                 </x-modal>
-
-                <div class="flex mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                        class="w-6 h-6 float-left m-1 text-sky-800 dark:text-sky-800">
-                        <path fill-rule="evenodd"
-                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <p class="mt-2 font-medium text-sm text-sky-800 dark:text-sky-800">
-                        Jika Anda yakin dengan data pelanggan berikut ini, Anda dapat menyetujuinya agar dapat
-                        ditindaklanjuti.
-                    </p>
-                </div>
             </div>
         </div>
-    @endif
-
-    @if (
+    @elseif (
         $dataPelanggan->persetujuan_unit == 'SETUJU' &&
             $dataPelanggan->persetujuan_rensis == 'TUNGGU' &&
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-6 h-6 float-left mb-1 mr-1 text-sky-800 dark:text-sky-800">
@@ -100,14 +105,12 @@
                 </p>
             </div>
         </div>
-    @endif
-
-    @if (
+    @elseif (
         $dataPelanggan->persetujuan_unit == 'TOLAK' &&
             $dataPelanggan->persetujuan_rensis == 'TUNGGU' &&
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-6 h-6 float-left mb-1 mr-1 text-sky-800 dark:text-sky-800">
@@ -121,14 +124,12 @@
                 </p>
             </div>
         </div>
-    @endif
-
-    @if (
+    @elseif (
         $dataPelanggan->persetujuan_unit == 'SETUJU' &&
             $dataPelanggan->persetujuan_rensis == 'TOLAK' &&
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-6 h-6 float-left mb-1 mr-1 text-sky-800 dark:text-sky-800">
@@ -142,14 +143,12 @@
                 </p>
             </div>
         </div>
-    @endif
-
-    @if (
+    @elseif (
         $dataPelanggan->persetujuan_unit == 'SETUJU' &&
             $dataPelanggan->persetujuan_rensis == 'SETUJU' &&
             $dataPelanggan->persetujuan_ren == 'TUNGGU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-6 h-6 float-left mb-1 mr-1 text-sky-800 dark:text-sky-800">
@@ -163,14 +162,12 @@
                 </p>
             </div>
         </div>
-    @endif
-
-    @if (
+    @elseif (
         $dataPelanggan->persetujuan_unit == 'SETUJU' &&
             $dataPelanggan->persetujuan_rensis == 'SETUJU' &&
             $dataPelanggan->persetujuan_ren == 'SETUJU')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-6 h-6 float-left mb-1 mr-1 text-sky-800 dark:text-sky-800">
@@ -185,14 +182,12 @@
                 </p>
             </div>
         </div>
-    @endif
-
-    @if (
+    @elseif (
         $dataPelanggan->persetujuan_unit == 'SETUJU' &&
             $dataPelanggan->persetujuan_rensis == 'SETUJU' &&
             $dataPelanggan->persetujuan_ren == 'TOLAK')
         <div
-            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+            class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-6 h-6 float-left mb-1 mr-1 text-sky-800 dark:text-sky-800">
@@ -211,121 +206,122 @@
     @endif
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <x-input-label class="border-b-2 border-dashed m-1 text-lg text-center"
-            value="Penanggung Jawab: {{ $dataPelanggan->tl_teknik_name }} sebagai {{ $dataPelanggan->tl_teknik_role }} {{ $dataPelanggan->tl_teknik_ulp }}" />
-        <x-input-label class="border-b-2 border-dashed m-1 text-lg text-center"
-            value="Tanggal dibuat: {{ $formatDate }}" />
-        <div class="grid grid-cols-2 gap-4 my-6 ">
-            <div>
+        <div class="border-b-2 border-dashed m-1 text-lg text-center">
+            <x-input-label
+                value="Penanggung Jawab: {{ $dataPelanggan->tl_teknik_name }} sebagai {{ $dataPelanggan->tl_teknik_role }} {{ $dataPelanggan->tl_teknik_ulp }}" />
+            <x-input-label value="Tanggal dibuat: {{ $formatDate }}" />
+        </div>
+        <div class="lg:grid grid-cols-2 gap-4 my-6 mx-2">
+            <div class="mb-2">
                 <x-input-label for="no_regis" :value="__('No. Regis')" />
                 <x-text-input id="no_regis" class="block mt-1 w-full" type="text" name="no_regis" readonly
                     value="{{ $dataPelanggan->no_regis }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="nama_pelanggan" :value="__('Nama Pelanggan')" />
                 <x-text-input id="nama_pelanggan" class="block mt-1 w-full" name="nama_pelanggan"
                     value="{{ $dataPelanggan->nama_pelanggan }}" readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="alamat_pelanggan" :value="__('Alamat Pelanggan')" />
                 <x-text-input id="alamat_pelanggan" class="block mt-1 w-full" name="alamat_pelanggan"
                     value="{{ $dataPelanggan->alamat_pelanggan }}" readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="ulp" :value="__('ULP')" />
                 <x-text-input id="ulp" class="block mt-1 w-full" value="{{ $dataPelanggan->ulp }}" readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="jenis_permohonan" :value="__('Jenis Permohonan')" />
                 <x-text-input id="jenis_permohonan" class="block mt-1 w-full"
                     value="{{ $dataPelanggan->jenis_permohonan }}" readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tarif_lama" :value="__('Tarif Lama')" />
                 <x-text-input id="tarif_lama" class="block mt-1 w-full" value="{{ $dataPelanggan->tarif_lama }}"
                     readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="daya_lama" :value="__('Daya Lama')" />
                 <x-text-input id="daya_lama" class="block mt-1 w-full" value="{{ $dataPelanggan->daya_lama }}"
                     readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tarif_baru" :value="__('Tarif Baru')" />
                 <x-text-input id="tarif_baru" class="block mt-1 w-full" value="{{ $dataPelanggan->tarif_baru }}"
                     readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="daya_baru" :value="__('Daya Baru')" />
                 <x-text-input id="daya_baru" class="block mt-1 w-full" value="{{ $dataPelanggan->daya_baru }}"
                     readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="delta" :value="__('DELTA')" />
                 <x-text-input id="delta" name="delta" class="block mt-1 w-full"
                     value="{{ $dataPelanggan->delta }}" readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="jumlah_pelanggan" :value="__('Jumlah Pelanggan')" />
                 <x-text-input class="block mt-1 w-full" value="{{ $dataPelanggan->jumlah_pelanggan }}" readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="nilai_bp" :value="__('Nilai BP')" />
                 <x-text-input id="nilai_bp" name="nilai_bp" class="block mt-1 w-full"
                     value="{{ $dataPelanggan->nilai_bp }}" readonly />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="kepastian_pelanggan" :value="__('Kepastian Pelanggan')" />
                 <x-text-input id="kepastian_pelanggan" class="block mt-1 w-full" type="text"
                     name="kepastian_pelanggan" readonly value="{{ $dataPelanggan->kepastian_pelanggan }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="vendor" :value="__('Vendor')" />
                 <x-text-input id="vendor" class="block mt-1 w-full" type="text" name="vendor" readonly
                     value="{{ $dataPelanggan->vendor }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="lama_bayar" :value="__('Lama Bayar')" />
                 <x-text-input id="lama_bayar" class="block mt-1 w-full" type="text" name="lama_bayar" readonly
                     value="{{ $dataPelanggan->lama_bayar }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tgl_dpb_ulp" :value="__('Tanggal DPB (ULP)')" />
                 <x-date-input id="tgl_dpb_ulp" name="tgl_dpb_ulp" class="block mt-1 w-full" readonly
                     value="{{ $dataPelanggan->tgl_dpb_ulp }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tgl_kajian_ren" :value="__('Tanggal Kajian (Ren)')" />
                 <x-date-input id="tgl_kajian_ren" name="tgl_kajian_ren" class="block mt-1 w-full" readonly
                     value="{{ $dataPelanggan->tgl_kajian_ren }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tgl_logistik_kons" :value="__('Tanggal Logistik (Kons)')" />
                 <x-date-input id="tgl_logistik_kons" name="tgl_logistik_kons" class="block mt-1 w-full" readonly
                     value="{{ $dataPelanggan->tgl_logistik_kons }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tgl_reservasi_kons" :value="__('Tanggal Reservasi (Kons)')" />
                 <x-date-input id="tgl_reservasi_kons" name="tgl_reservasi_kons" class="block mt-1 w-full" readonly
                     value="{{ $dataPelanggan->tgl_reservasi_kons }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tgl_register_pp" :value="__('Tanggal Register (PP)')" />
                 <x-date-input id="tgl_register_pp" name="tgl_register_pp" class="block mt-1 w-full" readonly
                     value="{{ $dataPelanggan->tgl_register_pp }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tgl_bayar_pp" :value="__('Tanggal Bayar (PP)')" />
                 <x-date-input id="tgl_bayar_pp" name="tgl_bayar_pp" class="block mt-1 w-full" readonly
                     value="{{ $dataPelanggan->tgl_bayar_pp }}" />
             </div>
-            <div>
+            <div class="mb-2">
                 <x-input-label for="tgl_pdl_pp" :value="__('Tanggal PDL (PP)')" />
                 <x-date-input id="tgl_pdl_pp" name="tgl_pdl_pp" class="block mt-1 w-full" readonly
                     value="{{ $dataPelanggan->tgl_pdl_pp }}" />
             </div>
         </div>
-        <div class="mt-2 mb-4">
+        <div class="mb-4 mx-2">
             <x-input-label for="foto_survei" :value="__('Hasil Gambar Survei')" />
             @if (!empty(json_decode($dataPelanggan->foto_survei)))
                 <div class="flex overflow-x-scroll hide-scroll-bar">
@@ -409,7 +405,7 @@
             }
         </style>
 
-        <div class="my-4">
+        <div class="my-4 mx-2">
             <x-input-label for="" :value="__('Pemesanan Material')" class="my-2" />
             <div class="p-2 border border-gray-300 dark:border-none dark:bg-gray-900 rounded-md shadow-sm">
                 @include('unit.manager-unit.pelanggan.tables.detail-table-pasang')

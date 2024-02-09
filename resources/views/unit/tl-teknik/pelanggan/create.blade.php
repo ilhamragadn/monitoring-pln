@@ -1,28 +1,27 @@
 @section('page_title', 'Tambah Data Calon Pelanggan')
 <x-app-layout>
-
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <form method="POST" action="{{ route('pelanggan-tl-teknik.store') }}" enctype="multipart/form-data">
             @csrf
-            <div class="grid grid-cols-2 gap-4 my-6">
+            <div class="lg:grid grid-cols-2 gap-4 my-6 mx-2">
                 <input type="hidden" name="id_tl_teknik" value="{{ Auth::user()->id }}" />
-                <div>
+                <div class="mb-2">
                     <x-input-label for="no_regis" :value="__('No. Regis')" />
                     <x-text-input id="no_regis" class="block mt-1 w-full" type="text" name="no_regis" autofocus />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="nama_pelanggan" :value="__('Nama Pelanggan')" />
                     <x-text-input id="nama_pelanggan" class="block mt-1 w-full" type="text" name="nama_pelanggan"
                         :value="old('nama_pelanggan')" required autocomplete="nama_pelanggan" />
                     <x-input-error :messages="$errors->get('nama_pelanggan')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="alamat_pelanggan" :value="__('Alamat Pelanggan')" />
                     <x-text-input id="alamat_pelanggan" class="block mt-1 w-full" type="text" name="alamat_pelanggan"
                         :value="old('alamat_pelanggan')" required autocomplete="alamat_pelanggan" />
                     <x-input-error :messages="$errors->get('alamat_pelanggan')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="ulp" :value="__('ULP')" />
                     <x-select-input class="block mt-1 w-full" name="ulp" id="ulp" required>
                         <option value="ULP Bangil">ULP Bangil</option>
@@ -37,7 +36,7 @@
                     </x-select-input>
                     <x-input-error :messages="$errors->get('ulp')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="jenis_permohonan" :value="__('Jenis Permohonan')" />
                     <x-select-input class="block mt-1 w-full" name="jenis_permohonan" id="jenis_permohonan" required>
                         <option value="Migrasi">Migrasi</option>
@@ -46,7 +45,7 @@
                     </x-select-input>
                     <x-input-error :messages="$errors->get('jenis_permohonan')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tarif_lama" :value="__('Tarif Lama')" />
                     <x-select-input id="tarif_lama" class="block mt-1 w-full" name="tarif_lama">
                         <option value="B1">B1</option>
@@ -76,13 +75,13 @@
                     </x-select-input>
                     <x-input-error :messages="$errors->get('tarif_lama')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="daya_lama" :value="__('Daya Lama')" />
                     <x-text-input id="daya_lama" :value="0" class="block mt-1 w-full" type="text"
                         name="daya_lama" autocomplete="daya_lama" />
                     <x-input-error :messages="$errors->get('daya_lama')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tarif_baru" :value="__('Tarif Baru')" />
                     <x-select-input id="tarif_baru" class="block mt-1 w-full" name="tarif_baru" required>
                         <option value="B1">B1</option>
@@ -118,73 +117,73 @@
                     </x-select-input>
                     <x-input-error :messages="$errors->get('tarif_baru')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="daya_baru" :value="__('Daya Baru')" />
                     <x-text-input id="daya_baru" :value="0" class="block mt-1 w-full" type="text"
                         name="daya_baru" autocomplete="daya_baru" required />
                     <x-input-error :messages="$errors->get('daya_baru')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="delta" :value="__('DELTA')" />
                     <x-text-input id="delta" class="block mt-1 w-full" type="text" name="delta"
                         autocomplete="delta" readonly placeholder="Daya Baru - Daya Lama" />
                     <x-input-error :messages="$errors->get('delta')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="jumlah_pelanggan" :value="__('Jumlah Pelanggan')" />
                     <x-text-input id="jumlah_pelanggan" :value=1 class="block mt-1 w-full" type="number"
                         name="jumlah_pelanggan" autocomplete="jumlah_pelanggan" required />
                     <x-input-error :messages="$errors->get('jumlah_pelanggan')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="nilai_bp" :value="__('Nilai BP')" />
                     <x-text-input id="nilai_bp" class="block mt-1 w-full" type="text" name="nilai_bp"
                         readonly />
                     <x-input-error :messages="$errors->get('nilai_bp')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="kepastian_pelanggan" :value="__('Kepastian Pelanggan')" />
                     <x-text-input id="kepastian_pelanggan" class="block mt-1 w-full" type="text"
                         name="kepastian_pelanggan" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="vendor" :value="__('Vendor')" />
                     <x-text-input id="vendor" class="block mt-1 w-full" type="text" name="vendor" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="lama_bayar" :value="__('Lama Bayar')" />
                     <x-text-input id="lama_bayar" class="block mt-1 w-full" type="text" name="lama_bayar" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tgl_dpb_ulp" :value="__('Tanggal DPB (ULP)')" />
                     <x-date-input id="tgl_dpb_ulp" name="tgl_dpb_ulp" class="block mt-1 w-full" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tgl_kajian_ren" :value="__('Tanggal Kajian (Ren)')" />
                     <x-date-input id="tgl_kajian_ren" name="tgl_kajian_ren" class="block mt-1 w-full" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tgl_logistik_kons" :value="__('Tanggal Logistik (Kons)')" />
                     <x-date-input id="tgl_logistik_kons" name="tgl_logistik_kons" class="block mt-1 w-full" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tgl_reservasi_kons" :value="__('Tanggal Reservasi (Kons)')" />
                     <x-date-input id="tgl_reservasi_kons" name="tgl_reservasi_kons" class="block mt-1 w-full" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tgl_register_pp" :value="__('Tanggal Register (PP)')" />
                     <x-date-input id="tgl_register_pp" name="tgl_register_pp" class="block mt-1 w-full" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tgl_bayar_pp" :value="__('Tanggal Bayar (PP)')" />
                     <x-date-input id="tgl_bayar_pp" name="tgl_bayar_pp" class="block mt-1 w-full" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="tgl_pdl_pp" :value="__('Tanggal PDL (PP)')" />
                     <x-date-input id="tgl_pdl_pp" name="tgl_pdl_pp" class="block mt-1 w-full" />
                 </div>
             </div>
-            <div class="mt-2 mb-4">
+            <div class="mt-2 mb-4 mx-2">
                 <x-input-label for="foto_survei" :value="__('Unggah Gambar Survei')" />
                 <x-text-input id="foto_survei" name="foto_survei[]" class="block mt-1 p-2 w-full border"
                     type="file" multiple />
@@ -193,7 +192,7 @@
                     foto 3 MB</small>
                 <x-input-error :messages="$errors->get('foto_survei.*')" class="mt-2" />
             </div>
-            <div class="my-4">
+            <div class="my-4 mx-2">
                 <x-input-label for="" :value="__('Pemesanan Material')" class="my-2" />
                 <div class="p-2 border border-gray-300 dark:border-none dark:bg-gray-900 rounded-md shadow-sm">
                     @include('unit.tl-teknik.pelanggan.tables.create-table-pasang')

@@ -1,7 +1,7 @@
 @section('page_title', 'Dashboard')
 <x-app-layout>
     <div
-        class="max-w-7xl sticky top-0 z-10 mx-auto sm:px-6 lg:px-8 overflow-hidden shadow-sm p-4 bg-gradient-to-r from-red-500 to-amber-500 text-gray-100 sm:rounded-b-lg">
+        class="max-w-7xl sticky top-0 z-10 mx-auto sm:px-6 lg:px-8 overflow-hidden shadow-sm p-4 bg-gradient-to-r from-red-500 to-amber-500 text-gray-100 rounded-b-lg">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <div class="mr-1">
@@ -13,7 +13,7 @@
                     </svg>
                 </div>
                 <div>
-                    <span class="text-lg font-semibold">{{ __('Selamat Datang, ') }}</span>
+                    <span class="font-semibold">{{ __('Selamat Datang, ') }}</span>
                     <span>{{ Auth::user()->name }}</span>
                 </div>
             </div>
@@ -24,9 +24,9 @@
     </div>
     <div class="p-4">
         <div
-            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
+            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm rounded-lg">
         </div>
-        <div class="grid grid-cols-3 gap-2 my-4">
+        <div class="lg:grid grid-cols-3 gap-2 my-4">
             <div>
                 <a href="hargapasang-tl-teknik"
                     class="block max-w-sm p-6 my-1 bg-gray-200 rounded-lg shadow-md hover:bg-gray-50 dark:bg-gray-800  dark:hover:bg-gray-700">
@@ -45,9 +45,9 @@
             </div>
         </div>
         <div
-            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
+            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm rounded-lg">
         </div>
-        <div class="grid grid-cols-3 gap-3 my-4">
+        <div class="lg:grid grid-cols-3 gap-3 my-4">
             <div class="my-auto">
                 <a href="pelanggan-tl-teknik"
                     class="block max-w-sm p-6 my-1 bg-gray-200 rounded-lg shadow-md hover:bg-gray-50 dark:bg-gray-800  dark:hover:bg-gray-700">
@@ -98,13 +98,13 @@
             </div>
         </div>
         <div
-            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
+            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm rounded-lg">
         </div>
         <div class="p-4 my-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
             @include('unit.tl-teknik.dashboard.tables.progress-tl-teknik')
         </div>
         <div
-            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm sm:rounded-lg">
+            class="max-w-7xl mx-auto mb-1 pb-1 sm:px-6 lg:px-8 bg-gradient-to-r from-red-700 to-amber-800 dark:text-gray-100 overflow-hidden shadow-sm rounded-lg">
         </div>
     </div>
 </x-app-layout>

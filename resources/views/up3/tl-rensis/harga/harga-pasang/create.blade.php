@@ -1,24 +1,23 @@
 @section('page_title', 'Tambah Data Harga Pasang')
 <x-app-layout>
-    
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <form method="POST" action="{{ route('hargapasang-tl-rensis.store') }}">
             @csrf
-            <div class="grid grid-cols-2 gap-4 my-6">
+            <div class="lg:grid grid-cols-2 gap-4 my-6 mx-2">
                 <input type="hidden" name="id_tl_rensis" value="{{ Auth::user()->id }}" />
-                <div>
+                <div class="mb-2">
                     <x-input-label for="material" :value="__('Material')" />
                     <x-text-input id="material" class="block mt-1 w-full" type="text" name="material"
                         :value="old('material')" required autofocus autocomplete="material" />
                     <x-input-error :messages="$errors->get('material')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="satuan" :value="__('Satuan')" />
                     <x-text-input id="satuan" class="block mt-1 w-full" type="text" name="satuan"
                         :value="old('satuan')" required autocomplete="satuan" />
                     <x-input-error :messages="$errors->get('satuan')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="klasifikasi" :value="__('Klasifikasi')" />
                     <x-select-input class="block mt-1 w-full" name="klasifikasi" id="klasifikasi">
                         <option value="JTM">JTM</option>
@@ -33,27 +32,25 @@
                     </x-select-input>
                     <x-input-error :messages="$errors->get('klasifikasi')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="rp_jasa" :value="__('RP Jasa')" />
                     <x-text-input id="rp_jasa" class="block mt-1 w-full" type="text" name="rp_jasa"
                         autocomplete="rp_jasa" />
-
                     <x-input-error :messages="$errors->get('rp_jasa')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="rp_mdu" :value="__('RP MDU')" />
                     <x-text-input id="rp_mdu" class="block mt-1 w-full" type="text" name="rp_mdu"
                         autocomplete="rp_mdu" />
-
                     <x-input-error :messages="$errors->get('rp_mdu')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="rp_non_mdu_dan_jasa" :value="__('RP NON MDU + Jasa')" />
                     <x-text-input id="rp_non_mdu_dan_jasa" class="block mt-1 w-full" type="text"
                         name="rp_non_mdu_dan_jasa" autocomplete="rp_non_mdu_dan_jasa" />
                     <x-input-error :messages="$errors->get('rp_non_mdu_dan_jasa')" class="mt-2" />
                 </div>
-                <div>
+                <div class="mb-2">
                     <x-input-label for="rp_total" :value="__('RP Total')" />
                     <x-text-input id="rp_total" class="block mt-1 w-full" type="text" name="rp_total"
                         autocomplete="rp_total" readonly />

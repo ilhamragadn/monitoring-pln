@@ -3,20 +3,23 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-screen-xl mx-auto sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex items-center lg:ml-52 text-gray-900 dark:text-white">
+            <div class="flex items-center lg:ml-56 md:ml-60 text-gray-900 dark:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                    class="h-8 w-8 text-red-600 rounded-md px-1">
+                    class="h-7 w-7 text-red-600 rounded-md px-1 mx-1">
                     <path fill-rule="evenodd"
                         d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z"
                         clip-rule="evenodd" />
                 </svg>
-
-                <div class="text-lg flex items-center">@yield('page_title')
-                    <div class="text-xl font-semibold italic ml-4 font-mono hover:underline hover:underline-offset-8">
-                        | Dalang Saékapraya.</div>
+                <div class="flex items-center">
+                    <div
+                        class="lg:text-lg sm:text-xs font-semibold italic mx-1 font-mono hover:underline hover:underline-offset-2">
+                        Dalang Saékapraya.
+                    </div>
+                    <div class="text-sm mt-1">
+                        @yield('page_title')
+                    </div>
                 </div>
             </div>
-
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -24,7 +27,7 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 dark:text-gray-400 bg-transparent dark:bg-gray-800 hover:text-red-600 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div class="text-lg">{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->name }}</div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">

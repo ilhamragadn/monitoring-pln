@@ -1,7 +1,7 @@
 @section('page_title', 'Data Calon Pelanggan')
 <x-app-layout>
     <div
-        class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow sm:rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
+        class="max-w-7xl mx-auto mb-6 p-2 sticky top-2 z-10 sm:px-6 lg:px-8 bg-sky-200 overflow-hidden shadow rounded-lg border-sky-800 dark:border-sky-800 dark:bg-sky-200">
         <div class="flex">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                 class="w-6 h-6 float-left mb-1 mr-1 text-sky-800 dark:text-sky-800">
@@ -17,19 +17,31 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
         <form action="{{ route('download-dapel-unit.downloadData') }}" method="post">
             @csrf
-            <div id="downloadDapel" class="float-left my-6 mr-6 invisible">
-                <button type="submit"
-                    class="flex items-center justify-center text-white font-medium hover:bg-green-400 hover:text-black bg-gray-500 rounded-full py-1 px-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                        class="w-5 h-5 mb-1">
-                        <path fill-rule="evenodd"
-                            d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span class="ml-1">Unduh .zip</span>
-                </button>
+            <div class="grid grid-cols-2">
+                <div class="col-span-1">
+                    <div class="flex justify-start my-6 mx-2">
+                        <div id="downloadDapel" class="invisible">
+                            <button type="submit"
+                                class="flex items-center justify-center text-white font-medium hover:bg-green-400 hover:text-black bg-gray-500 rounded-full py-1 px-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-5 h-5 mb-1">
+                                    <path fill-rule="evenodd"
+                                        d="M12 2.25a.75.75 0 0 1 .75.75v11.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 1 1 1.06-1.06l3.22 3.22V3a.75.75 0 0 1 .75-.75Zm-9 13.5a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <span class="ml-1">Unduh .zip</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="flex justify-end my-6 mx-2">
+                    </div>
+                </div>
             </div>
-            @include('unit.manager-unit.pelanggan.tables.index-table-pasang')
+            <div class="mx-2">
+                @include('unit.manager-unit.pelanggan.tables.index-table-pasang')
+            </div>
         </form>
     </div>
 </x-app-layout>
