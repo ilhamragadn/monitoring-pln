@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['Manager Perencanaan', 'Manager Unit', 'TL Rensis', 'TL Teknik', 'Pegawai']);
-            $table->enum('ulp', ['ULP Bangil', 'ULP Gondang Wetan', 'ULP Grati', 'ULP Kraksaan', 'ULP Pandaan', 'ULP Pasuruan Kota', 'ULP Prigen', 'ULP Probolinggo', 'ULP Sukorejo']);
+            $table->enum('ulp', ['ULP Bangil', 'ULP Gondang Wetan', 'ULP Grati', 'ULP Kraksaan', 'ULP Pandaan', 'ULP Pasuruan Kota', 'ULP Prigen', 'ULP Probolinggo', 'ULP Sukorejo'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
